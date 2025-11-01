@@ -90,7 +90,7 @@ export default function Contact() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Information */}
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
+                <h2 className="text-3xl font-bold text-gray-200 mb-8">Get in Touch</h2>
 
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
@@ -101,11 +101,15 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
-                      <p className="text-gray-600">
+                      <h3 className="font-semibold text-gray-100 mb-1">Address</h3>
+                      <p className="text-gray-400">
+                        Vighnaharta Steels<br/>
                         123 Industrial Area, Sector 45<br/>
                         Steel City, Maharashtra 12345<br/>
-                        India
+                        India<br/>
+                        Phone: +91 98765 43210<br/>
+                        Email: info@vighnahartasteel.com<br/>
+                        Website: https://vighnahartasteel.com
                       </p>
                     </div>
                   </div>
@@ -117,8 +121,8 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                      <p className="text-gray-600">
+                      <h3 className="font-semibold text-gray-100 mb-1">Phone</h3>
+                      <p className="text-gray-400">
                         +91 98765 43210<br/>
                         +91 98765 43211 (Sales)<br/>
                         Toll Free: 1800-123-4567
@@ -133,8 +137,8 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                      <p className="text-gray-600">
+                      <h3 className="font-semibold text-gray-100 mb-1">Email</h3>
+                      <p className="text-gray-400">
                         info@vighnahartasteel.com<br/>
                         sales@vighnahartasteel.com<br/>
                         support@vighnahartasteel.com
@@ -149,8 +153,8 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Business Hours</h3>
-                      <p className="text-gray-600">
+                      <h3 className="font-semibold text-gray-100 mb-1">Business Hours</h3>
+                      <p className="text-gray-400">
                         Monday - Saturday: 9:00 AM - 6:00 PM<br/>
                         Sunday: Closed<br/>
                         Emergency: 24/7 Support
@@ -177,7 +181,7 @@ export default function Contact() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                       />
                     </div>
 
@@ -192,7 +196,7 @@ export default function Contact() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                       />
                     </div>
                   </div>
@@ -208,7 +212,7 @@ export default function Contact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                       />
                     </div>
 
@@ -222,7 +226,7 @@ export default function Contact() {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                       />
                     </div>
                   </div>
@@ -237,7 +241,7 @@ export default function Contact() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                     >
                       <option value="">Select a subject</option>
                       <option value="general">General Inquiry</option>
@@ -261,7 +265,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Please provide details about your requirements..."
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                     ></textarea>
                   </div>
 

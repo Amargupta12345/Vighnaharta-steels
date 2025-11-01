@@ -9,14 +9,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Image
-                src="/assets/images/logo.svg"
-                alt="Vighnaharta Steel Industries"
-                width={180}
-                height={60}
-                className="h-12 w-auto"
-              />
+            <Link href="/" className="flex items-center space-x-3 mb-4">
+              <div className="bg-white/50 backdrop-blur-sm p-2 rounded-lg">
+                <Image
+                  src="/assets/images/vighnaharta-steels-logo.svg"
+                  alt="Vighnaharta Steels"
+                  width={80}
+                  height={80}
+                  className="h-12 w-12"
+                />
+              </div>
+              <h2 className="text-white text-2xl font-bold">Vighnaharta Steels</h2>
             </Link>
             <p className="text-gray-300 mb-4 max-w-md">
               Leading manufacturer and supplier of high-quality steel products.
@@ -62,6 +65,11 @@ const Footer = () => {
               <li>
                 <Link href="/products" className="text-gray-300 hover:text-white transition-colors">
                   Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-gray-300 hover:text-white transition-colors">
+                  Testimonials
                 </Link>
               </li>
               <li>

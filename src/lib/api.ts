@@ -123,3 +123,20 @@ export const pagesAPI = {
     return fetchAPI<{ title: string; content: string; metadata: any }>(`/pages/${slugPath}`);
   }
 };
+
+// Testimonials API
+export const testimonialsAPI = {
+  getAll: async (params?: { featured?: boolean; limit?: number }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.featured) queryParams.append('featured', 'true');
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+
+    const query = queryParams.toString();
+    const endpoint = `/testimonials${query ? `?${query}` : ''}`;
+    return fetchAPI<{ success: boolean; data: any[]; total: number }>(endpoint);
+  },
+
+  getFeatured: async (limit?: number) => {
+    return testimonialsAPI.getAll({ featured: true, limit });
+  }
+};

@@ -25,10 +25,10 @@ const Banner: React.FC<BannerProps> = ({
   showProducts = true
 }) => {
   const products = [
-    { name: "Steel Beams", image: "/assets/images/steel-beam.svg" },
-    { name: "Steel Rods", image: "/assets/images/steel-rod.svg" },
-    { name: "Steel Sheets", image: "/assets/images/steel-sheet.svg" },
-    { name: "Steel Pipes", image: "/assets/images/steel-pipe.svg" }
+    { name: "Steel Beams", image: "/assets/images/steel-beam.svg", slug: "steel-i-beams" },
+    { name: "Steel Rods", image: "/assets/images/steel-rod.svg", slug: "steel-rods" },
+    { name: "Steel Sheets", image: "/assets/images/steel-sheet.svg", slug: "steel-sheets" },
+    { name: "Steel Pipes", image: "/assets/images/steel-pipe.svg", slug: "steel-pipes" }
   ];
 
   return (
@@ -68,7 +68,11 @@ const Banner: React.FC<BannerProps> = ({
           {showProducts && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {products.map((product, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-colors">
+                <Link
+                  key={index}
+                  href={`/products/${product.slug}`}
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-colors cursor-pointer"
+                >
                   <div className="relative h-16 w-full mb-2">
                     <Image
                       src={product.image}
@@ -79,7 +83,7 @@ const Banner: React.FC<BannerProps> = ({
                     />
                   </div>
                   <h3 className="text-sm font-medium">{product.name}</h3>
-                </div>
+                </Link>
               ))}
             </div>
           )}

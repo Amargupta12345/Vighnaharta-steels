@@ -14,16 +14,20 @@ const Navbar = () => {
   return (
     <nav className="bg-steel-blue text-white sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-2">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <Image
-              src="/assets/images/logo.svg"
-              alt="Vighnaharta Steel Industries"
-              width={180}
-              height={60}
-              className="h-12 w-auto"
-            />
+            <div className="bg-white/50 backdrop-blur-sm p-2 rounded-lg">
+              <Image
+                src="/assets/images/vighnaharta-steels-logo.svg"
+                alt="Vighnaharta Steels"
+                width={80}
+                height={80}
+                className="h-12 w-12"
+                priority
+              />
+            </div>
+            <h2 className="text-white text-2xl font-bold">Vighnaharta Steels</h2>
           </Link>
 
           {/* Desktop Menu */}
@@ -36,6 +40,9 @@ const Navbar = () => {
             </Link>
             <Link href="/products" className="hover:text-gray-300 transition-colors font-medium">
               Products
+            </Link>
+            <Link href="/testimonials" className="hover:text-gray-300 transition-colors font-medium">
+              Testimonials
             </Link>
             <Link href="/contact" className="hover:text-gray-300 transition-colors font-medium">
               Contact
@@ -80,6 +87,13 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Products
+            </Link>
+            <Link
+              href="/testimonials"
+              className="hover:text-gray-300 transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Testimonials
             </Link>
             <Link
               href="/contact"
