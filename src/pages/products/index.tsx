@@ -1,119 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import ProductGrid from '../../components/ProductGrid';
-import { productsAPI } from '../../lib/api';
+import TrendingProductsCarousel from '../../components/TrendingProductsCarousel';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { fetchProducts } from '../../store/slices/productsSlice';
 
 export default function Products() {
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
 
+  // Get data from Redux store
+  const products = useAppSelector((state) => state.products.products);
+  const loading = useAppSelector((state) => state.products.loading);
+  const error = useAppSelector((state) => state.products.error);
+
+  // Fetch products from Redux store on mount
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const response = await productsAPI.getAll();
-
-        if (response.success) {
-          setProducts(response.data);
-        } else {
-          setError('Failed to load products');
-        }
-      } catch (err: any) {
-        console.error('Error fetching products:', err);
-        setError('Failed to load products. Please try again later.');
-
-        // Fallback to mock data
-        setProducts([
-          {
-            id: '1',
-            name: 'Steel I-Beams',
-            image: '/assets/images/steel-beam.svg',
-            description: 'High-strength structural steel I-beams perfect for construction projects.',
-            price: 'From ₹45/kg',
-            specifications: ['Grade: IS 2062', 'Size: 100mm-600mm', 'Length: Up to 12m'],
-            slug: 'steel-i-beams'
-          },
-    {
-      id: '2',
-      name: 'Steel Rods (TMT Bars)',
-      image: '/assets/images/steel-rod.svg',
-      description: 'Premium quality TMT (Thermo Mechanically Treated) steel rods for reinforcement in concrete structures. Superior strength and corrosion resistance.',
-      price: 'From ₹52/kg',
-      specifications: [
-        'Grade: Fe 500D, Fe 550D',
-        'Diameter: 8mm-32mm',
-        'Length: 12m standard',
-        'Tensile Strength: 500-600 N/mm²'
-      ],
-      slug: 'steel-rods'
-    },
-    {
-      id: '3',
-      name: 'Steel Sheets',
-      image: '/assets/images/steel-sheet.svg',
-      description: 'High-quality steel sheets suitable for roofing, cladding, and various industrial applications. Available in galvanized and cold-rolled options.',
-      price: 'From ₹65/kg',
-      specifications: [
-        'Thickness: 0.5mm-6mm',
-        'Width: Up to 1500mm',
-        'Coating: Galvanized/CR/HR',
-        'Grade: IS 277, IS 513'
-      ],
-      slug: 'steel-sheets'
-    },
-    {
-      id: '4',
-      name: 'Steel Pipes',
-      image: '/assets/images/steel-pipe.svg',
-      description: 'Seamless and welded steel pipes for water supply, gas lines, and structural applications. Compliant with international standards.',
-      price: 'From ₹58/kg',
-      specifications: [
-        'Size: 15mm-600mm',
-        'Grade: IS 1239, IS 3589',
-        'Type: ERW, Seamless',
-        'Pressure: Up to 40 kg/cm²'
-      ],
-      slug: 'steel-pipes'
-    },
-    {
-      id: '5',
-      name: 'Steel Angles',
-      image: '/assets/images/steel-beam.svg',
-      description: 'L-shaped steel angles used in construction and fabrication work. Available in equal and unequal angle configurations.',
-      price: 'From ₹48/kg',
-      specifications: [
-        'Size: 20x20mm to 200x200mm',
-        'Thickness: 3mm-20mm',
-        'Length: 6m, 12m',
-        'Grade: IS 2062'
-      ],
-      slug: 'steel-angles'
-    },
-    {
-      id: '6',
-      name: 'Steel Channels',
-      image: '/assets/images/steel-beam.svg',
-      description: 'C-shaped steel channels for structural applications. Ideal for framework, supports, and general construction purposes.',
-      price: 'From ₹50/kg',
-      specifications: [
-        'Size: 75mm-400mm',
-        'Weight: 6.8 kg/m to 50.1 kg/m',
-        'Length: 12m standard',
-        'Grade: IS 808'
-      ],
-      slug: 'steel-channels'
-          }
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const categories = [
     {
@@ -149,12 +54,17 @@ export default function Products() {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center mb-8">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Products</h1>
               <p className="text-xl text-gray-300 mb-8">
                 Comprehensive range of high-quality steel products for all your construction and industrial needs
               </p>
             </div>
+
+            {/* Trending Products Carousel */}
+            {!loading && products.length > 0 && (
+              <TrendingProductsCarousel products={products} />
+            )}
           </div>
         </section>
 

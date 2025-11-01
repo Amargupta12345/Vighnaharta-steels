@@ -1,10 +1,13 @@
 // API utility functions for fetching data from backend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
-
 // Generic fetch helper
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`;
+  // Get API base URL - determine dynamically
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
+
+  // Ensure endpoint starts with /
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${API_BASE_URL}${normalizedEndpoint}`;
 
   try {
     const response = await fetch(url, {
@@ -13,16 +16,34 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
         'Content-Type': 'application/json',
         ...options?.headers,
       },
+      cache: 'no-store', // Ensure fresh data on client side
     });
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      const errorText = await response.text();
+      let errorMessage = `API Error: ${response.status} ${response.statusText}`;
+
+      try {
+        const errorData = JSON.parse(errorText);
+        errorMessage = errorData.error || errorData.message || errorMessage;
+      } catch {
+        // If not JSON, use the text or status text
+        errorMessage = errorText || errorMessage;
+      }
+
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
     return data as T;
-  } catch (error) {
-    console.error(`API Error fetching ${endpoint}:`, error);
+  } catch (error: any) {
+    console.error(`API Error fetching ${url}:`, error);
+
+    // Provide more helpful error messages
+    if (error.message?.includes('404')) {
+      throw new Error(`API endpoint not found: ${url}. Please check the route configuration.`);
+    }
+
     throw error;
   }
 }

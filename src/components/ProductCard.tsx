@@ -1,16 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Product } from '../types/product';
 
-interface ProductCardProps {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  price?: string;
-  specifications?: string[];
-  slug: string;
-}
+interface ProductCardProps extends Product {}
 
 const ProductCard: React.FC<ProductCardProps> = ({
   id,
@@ -41,12 +34,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <div className="mb-4">
             <h4 className="font-medium text-gray-800 mb-2">Key Specifications:</h4>
             <ul className="text-sm text-gray-600 space-y-1">
-              {specifications.slice(0, 3).map((spec, index) => (
-                <li key={index} className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-accent-orange rounded-full mr-2"></span>
-                  {spec}
-                </li>
-              ))}
+              {specifications.slice(0, 3).map((spec, index) => {
+                const specText = typeof spec === 'string'
+                  ? spec
+                  : `${spec.label}: ${spec.value}`;
+                return (
+                  <li key={index} className="flex items-center">
+                    <span className="w-1.5 h-1.5 bg-accent-orange rounded-full mr-2"></span>
+                    {specText}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}

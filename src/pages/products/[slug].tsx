@@ -1,46 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { productsAPI } from '../../lib/api';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { fetchProductBySlug, clearCurrentProduct } from '../../store/slices/productsSlice';
 
 export default function ProductDetail() {
   const router = useRouter();
   const { slug } = router.query;
+  const dispatch = useAppDispatch();
 
-  const [product, setProduct] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Get data from Redux store
+  const product = useAppSelector((state) => state.products.currentProduct);
+  const loading = useAppSelector((state) => state.products.loading);
+  const error = useAppSelector((state) => state.products.error);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      if (!slug || typeof slug !== 'string') {
-        setLoading(false);
-        return;
-      }
+    if (slug && typeof slug === 'string') {
+      dispatch(fetchProductBySlug(slug));
+    }
 
-      try {
-        setLoading(true);
-        const response = await productsAPI.getBySlug(slug);
-
-        if (response.success) {
-          setProduct(response.data);
-          setError(null);
-        } else {
-          setError('Product not found');
-        }
-      } catch (err: any) {
-        console.error('Error fetching product:', err);
-        setError('Failed to load product. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
+    // Cleanup on unmount
+    return () => {
+      dispatch(clearCurrentProduct());
     };
-
-    fetchProduct();
-  }, [slug]);
+  }, [slug, dispatch]);
 
   // Loading state
   if (loading) {

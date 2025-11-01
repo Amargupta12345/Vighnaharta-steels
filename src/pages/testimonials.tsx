@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Testimonials from '../components/Testimonials';
-import { testimonialsAPI } from '../lib/api';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { fetchTestimonials } from '../store/slices/testimonialsSlice';
 
 export default function TestimonialsPage() {
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
 
+  // Get data from Redux store
+  const testimonials = useAppSelector((state) => state.testimonials.testimonials);
+  const loading = useAppSelector((state) => state.testimonials.loading);
+  const error = useAppSelector((state) => state.testimonials.error);
+
+  // Fetch testimonials from Redux store on mount
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        setLoading(true);
-        const response = await testimonialsAPI.getAll();
-
-        if (response.success) {
-          setTestimonials(response.data);
-          setError(null);
-        } else {
-          setError('Failed to load testimonials');
-        }
-      } catch (err: any) {
-        console.error('Error fetching testimonials:', err);
-        setError('Failed to load testimonials. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
+    dispatch(fetchTestimonials());
+  }, [dispatch]);
 
   return (
     <>

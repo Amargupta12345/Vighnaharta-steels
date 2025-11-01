@@ -93,9 +93,10 @@ const mockBackendPages: Record<string, PageData> = {
 // GET endpoint to fetch page data
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string[] } }
+  { params }: { params: Promise<{ slug: string[] }> }
 ) {
-  const slugString = params.slug.join('/');
+  const { slug } = await params;
+  const slugString = slug.join('/');
 
   try {
     // In a real application, you would fetch this data from your backend
@@ -123,9 +124,10 @@ export async function GET(
 // POST endpoint to create/update pages (for CMS integration)
 export async function POST(
   request: NextRequest,
-  { params }: { params: { slug: string[] } }
+  { params }: { params: Promise<{ slug: string[] }> }
 ) {
-  const slugString = params.slug.join('/');
+  const { slug } = await params;
+  const slugString = slug.join('/');
 
   try {
     const body = await request.json();
@@ -170,9 +172,10 @@ export async function POST(
 // DELETE endpoint to remove pages
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string[] } }
+  { params }: { params: Promise<{ slug: string[] }> }
 ) {
-  const slugString = params.slug.join('/');
+  const { slug } = await params;
+  const slugString = slug.join('/');
 
   try {
     // In a real application, you would delete from your database

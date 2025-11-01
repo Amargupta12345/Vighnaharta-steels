@@ -1,14 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { toggleMobileMenu, setMobileMenuOpen } from '../store/slices/uiSlice';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMenuOpen = useAppSelector((state) => state.ui.mobileMenuOpen);
+  const dispatch = useAppDispatch();
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    dispatch(toggleMobileMenu());
+  };
+
+  const closeMenu = () => {
+    dispatch(setMobileMenuOpen(false));
   };
 
   return (
@@ -70,42 +77,42 @@ const Navbar = () => {
             <Link
               href="/"
               className="hover:text-gray-300 transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Home
             </Link>
             <Link
               href="/about"
               className="hover:text-gray-300 transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               About
             </Link>
             <Link
               href="/products"
               className="hover:text-gray-300 transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Products
             </Link>
             <Link
               href="/testimonials"
               className="hover:text-gray-300 transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Testimonials
             </Link>
             <Link
               href="/contact"
               className="hover:text-gray-300 transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Contact
             </Link>
             <Link
               href="/quote"
               className="bg-accent-orange hover:bg-accent-orange-dark px-4 py-2 rounded-lg transition-colors font-medium text-center"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Get Quote
             </Link>
