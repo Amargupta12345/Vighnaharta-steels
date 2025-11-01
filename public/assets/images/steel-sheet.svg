@@ -1,0 +1,19 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sheetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0c0c0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f0f0f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#888;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="80" y="80" width="240" height="140" fill="url(#sheetGradient)" stroke="#666" stroke-width="2"/>
+  <line x1="80" y1="100" x2="320" y2="100" stroke="#aaa" stroke-width="1"/>
+  <line x1="80" y1="120" x2="320" y2="120" stroke="#aaa" stroke-width="1"/>
+  <line x1="80" y1="140" x2="320" y2="140" stroke="#aaa" stroke-width="1"/>
+  <line x1="80" y1="160" x2="320" y2="160" stroke="#aaa" stroke-width="1"/>
+  <line x1="80" y1="180" x2="320" y2="180" stroke="#aaa" stroke-width="1"/>
+  <line x1="80" y1="200" x2="320" y2="200" stroke="#aaa" stroke-width="1"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">Steel Sheet</text>
+</svg>
+
+

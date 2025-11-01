@@ -1,0 +1,16 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pipeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a0a0a0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#e0e0e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#707070;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <ellipse cx="100" cy="150" rx="20" ry="40" fill="url(#pipeGradient)" stroke="#666" stroke-width="2"/>
+  <rect x="100" y="110" width="200" height="80" fill="url(#pipeGradient)" stroke="#666" stroke-width="2"/>
+  <ellipse cx="300" cy="150" rx="20" ry="40" fill="url(#pipeGradient)" stroke="#666" stroke-width="2"/>
+  <ellipse cx="300" cy="150" rx="12" ry="32" fill="#fff" stroke="#666" stroke-width="1"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">Steel Pipe</text>
+</svg>
+
+

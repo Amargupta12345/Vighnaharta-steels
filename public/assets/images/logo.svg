@@ -1,0 +1,13 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a5568;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d3748;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="10" y="20" width="180" height="40" fill="url(#logoGradient)" rx="8"/>
+  <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff" font-weight="bold">VIGHNAHARTA</text>
+  <text x="100" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#e2e8f0">STEEL INDUSTRIES</text>
+</svg>
+
+

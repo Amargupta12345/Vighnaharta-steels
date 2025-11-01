@@ -1,0 +1,1 @@
+// Hero section for home page
