@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '../../../lib/mongodb';
-import QuoteRequest from '../../../models/QuoteRequest';
+import connectDB from '../../../../lib/mongodb';
+import QuoteRequest from '../../../../models/QuoteRequest';
 
 // POST /api/quote - Submit quote request
 export async function POST(request: NextRequest) {
