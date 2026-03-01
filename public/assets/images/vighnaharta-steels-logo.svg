@@ -1,37 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
   <defs>
-    <linearGradient id="steelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2E3A59;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#3d4d6e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e2535;stop-opacity:1" />
+    <linearGradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a4a6b"/>
+      <stop offset="100%" stop-color="#1e2535"/>
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
-    </filter>
   </defs>
-
-  <!-- Background rectangle for semi-transparent white -->
-  <rect width="120" height="120" fill="white" opacity="0.95" rx="8"/>
-
-  <!-- I-Beam Shape -->
-  <g transform="translate(30, 20)" filter="url(#shadow)">
-    <!-- Top flange -->
-    <rect x="0" y="0" width="60" height="12" fill="url(#steelGradient)" rx="2"/>
-
-    <!-- Web (vertical center) -->
-    <rect x="26" y="12" width="8" height="56" fill="url(#steelGradient)"/>
-
-    <!-- Bottom flange -->
-    <rect x="0" y="68" width="60" height="12" fill="url(#steelGradient)" rx="2"/>
-
-    <!-- Left edge highlight for 3D effect -->
-    <rect x="0" y="0" width="3" height="12" fill="#4a5f7a" opacity="0.6" rx="1"/>
-    <rect x="26" y="12" width="2" height="56" fill="#4a5f7a" opacity="0.6"/>
-    <rect x="0" y="68" width="3" height="12" fill="#4a5f7a" opacity="0.6" rx="1"/>
-
-    <!-- Right edge shadow for 3D effect -->
-    <rect x="57" y="0" width="3" height="12" fill="#1e2535" opacity="0.4" rx="1"/>
-    <rect x="32" y="12" width="2" height="56" fill="#1e2535" opacity="0.4"/>
-    <rect x="57" y="68" width="3" height="12" fill="#1e2535" opacity="0.4" rx="1"/>
-  </g>
+  <!-- Rounded square background -->
+  <rect width="80" height="80" rx="16" fill="url(#steelGrad)"/>
+  <!-- Abstract steel beam / V+S monogram -->
+  <!-- V shape (Vighnaharta) -->
+  <polygon points="20,22 40,58 60,22 52,22 40,48 28,22" fill="#FF6F00"/>
+  <!-- Two horizontal bars (steel beams) -->
+  <rect x="22" y="60" width="36" height="5" rx="2" fill="#B0BEC5"/>
+  <rect x="28" y="68" width="24" height="4" rx="2" fill="#B0BEC5" opacity="0.6"/>
 </svg>

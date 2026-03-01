@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Testimonials from '../components/Testimonials';
@@ -35,22 +36,41 @@ export default function TestimonialsPage() {
         <Navbar />
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white py-20">
-          <div className="absolute inset-0 bg-black opacity-30"></div>
+        <section className="relative pt-32 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white py-28 overflow-hidden">
+          <div className="absolute top-20 right-10 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 left-20 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
           <div className="relative container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Customer Testimonials
+            <div className="animate-fade-in inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-5 py-2 mb-6">
+              <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
+              <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Client Reviews</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+              Customer <span className="text-accent-orange">Testimonials</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
               Discover what our clients say about working with Vighnaharta Steel Industries
             </p>
+            {/* Rating summary */}
+            <div className="inline-flex items-center gap-4 glass rounded-2xl px-8 py-4">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-6 h-6 text-accent-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <div className="text-left">
+                <div className="text-xl font-extrabold">4.9 / 5.0</div>
+                <div className="text-gray-300 text-sm">Based on 500+ reviews</div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Loading State */}
         {loading && (
           <div className="container mx-auto px-4 py-16 text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-steel-blue"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-accent-orange"></div>
             <p className="mt-4 text-gray-600">Loading testimonials...</p>
           </div>
         )}
@@ -58,12 +78,13 @@ export default function TestimonialsPage() {
         {/* Error State */}
         {error && !loading && (
           <div className="container mx-auto px-4 py-16">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl font-bold text-red-800 mb-4">Error Loading Testimonials</h2>
+            <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center max-w-2xl mx-auto">
+              <span className="text-4xl mb-4 block">❌</span>
+              <h2 className="text-2xl font-extrabold text-red-800 mb-4">Error Loading Testimonials</h2>
               <p className="text-red-600 mb-6">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
+                className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-all duration-300 font-semibold hover:-translate-y-0.5"
               >
                 Try Again
               </button>
@@ -78,27 +99,39 @@ export default function TestimonialsPage() {
 
         {/* CTA Section */}
         {!loading && !error && (
-          <section className="py-16 bg-gradient-to-br from-steel-blue to-steel-blue-dark text-white">
-            <div className="container mx-auto px-4 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Join Our Satisfied Customers?
+          <section className="py-24 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-accent-orange/5 rounded-full blur-2xl"></div>
+            <div className="container mx-auto px-4 text-center relative z-10">
+              <div className="inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-5 py-2 mb-8">
+                <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
+                <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Join Us</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+                Ready to Join Our <span className="text-accent-orange">Satisfied</span> Customers?
               </h2>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-xl mb-10 opacity-80 max-w-2xl mx-auto">
                 Get in touch with us today and experience the Vighnaharta Steel difference.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
+                <Link
                   href="/quote"
-                  className="bg-accent-orange hover:bg-accent-orange-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center shadow-lg"
+                  className="group bg-accent-orange hover:bg-accent-orange-dark text-white px-10 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center shadow-lg shadow-accent-orange/30 hover:shadow-xl hover:-translate-y-1"
                 >
                   Get Free Quote
-                </a>
-                <a
+                  <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </Link>
+                <Link
                   href="/contact"
-                  className="border-2 border-white hover:bg-white hover:text-steel-blue px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+                  className="group border-2 border-white/50 hover:bg-white hover:text-steel-blue px-10 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center hover:-translate-y-1"
                 >
                   Contact Us
-                </a>
+                  <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </Link>
               </div>
             </div>
           </section>
@@ -109,4 +142,3 @@ export default function TestimonialsPage() {
     </>
   );
 }
-

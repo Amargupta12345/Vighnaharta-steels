@@ -60,7 +60,7 @@ export default function HomeReduxExample() {
     subtitle: "Vighnaharta Steel Industries",
     description: "Leading manufacturer and supplier of high-quality steel products for construction and industrial applications.",
     primaryButtonText: "View Products",
-    primaryButtonLink: "/products",
+    primaryButtonLink: "/product",
     secondaryButtonText: "Get Quote",
     secondaryButtonLink: "/quote"
   };

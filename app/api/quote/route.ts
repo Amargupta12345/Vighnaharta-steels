@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import connectDB from '../../../lib/mongodb';
+import QuoteRequest from '../../../models/QuoteRequest';
 
 // POST /api/quote - Submit quote request
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+
     const body = await request.json();
     const {
       name,
@@ -46,8 +50,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const quoteRequest = {
-      id: `QR-${Date.now()}`,
+    // Save to MongoDB
+    const quoteRequest = await QuoteRequest.create({
       name,
       email,
       phone,
@@ -58,32 +62,18 @@ export async function POST(request: NextRequest) {
       deliveryDate: deliveryDate || null,
       deliveryLocation,
       message: message || '',
-      submittedAt: new Date().toISOString(),
       status: 'pending',
-      estimatedResponseTime: '24 hours'
-    };
+    });
 
-    // In production, you would:
-    // 1. Save to database
-    // 2. Send email notification to sales team
-    // 3. Send confirmation email to customer
-    // 4. Create quote estimate based on specifications
-
-    // Mock: Save to database
-    // await saveQuoteRequest(quoteRequest);
-
-    // Mock: Send notifications
-    // await sendQuoteNotification(quoteRequest);
-
-    console.log('Quote request submission:', quoteRequest);
+    console.log('✅ Quote saved to MongoDB:', quoteRequest._id);
 
     return NextResponse.json({
       success: true,
       message: 'Thank you for your quote request. Our sales team will contact you within 24 hours!',
       data: {
-        quoteId: quoteRequest.id,
-        submittedAt: quoteRequest.submittedAt,
-        estimatedResponseTime: quoteRequest.estimatedResponseTime
+        quoteId: quoteRequest._id,
+        submittedAt: quoteRequest.createdAt,
+        estimatedResponseTime: '24 hours'
       }
     }, { status: 201 });
   } catch (error) {
@@ -95,30 +85,37 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET /api/quote - Get quote request by ID (for tracking)
+// GET /api/quote - Get all quote requests (admin) or single by ID
 export async function GET(request: NextRequest) {
   try {
+    await connectDB();
+
     const { searchParams } = new URL(request.url);
     const quoteId = searchParams.get('id');
 
-    if (!quoteId) {
-      return NextResponse.json(
-        { success: false, error: 'Quote ID is required' },
-        { status: 400 }
-      );
+    if (quoteId) {
+      // Fetch single quote
+      const quote = await QuoteRequest.findById(quoteId);
+      if (!quote) {
+        return NextResponse.json(
+          { success: false, error: 'Quote not found' },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json({ success: true, data: quote });
     }
 
-    // In production, fetch from database
-    // const quote = await getQuoteById(quoteId);
-
-    // Mock response
+    // Fetch all quotes (sorted newest first)
+    const quotes = await QuoteRequest.find().sort({ createdAt: -1 });
     return NextResponse.json({
       success: true,
-      message: 'Quote requests will be tracked here in production'
+      count: quotes.length,
+      data: quotes
     });
   } catch (error) {
+    console.error('Quote fetch error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch quote' },
+      { success: false, error: 'Failed to fetch quotes' },
       { status: 500 }
     );
   }

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '../types/product';
+import { ImageSizes } from '../utils/imageUtils';
 
 interface TrendingProductsCarouselProps {
   products: Product[];
@@ -128,8 +129,9 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-4 filter brightness-0 invert"
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover rounded-lg"
+                        sizes={ImageSizes.carousel.sizes}
+                        quality={85}
                       />
                     </div>
 
@@ -151,7 +153,7 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
                       {/* Action Buttons */}
                       <div className="flex gap-2">
                         <Link
-                          href={`/products/${product.slug}`}
+                          href={`/product/${product.slug}`}
                           className="flex-1 bg-steel-blue hover:bg-steel-blue-dark text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm text-center"
                         >
                           View Details

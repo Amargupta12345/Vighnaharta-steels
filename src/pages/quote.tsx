@@ -68,6 +68,8 @@ export default function Quote() {
     }
   };
 
+  const inputClasses = "w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-accent-orange/30 focus:border-accent-orange outline-none transition-all duration-300 text-gray-800 placeholder-gray-400 hover:border-gray-300";
+
   return (
     <>
       <Head>
@@ -82,258 +84,204 @@ export default function Quote() {
         <Navbar />
 
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-20">
-          <div className="container mx-auto px-4">
+        <section className="pt-32 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white py-28 relative overflow-hidden">
+          <div className="absolute top-20 right-10 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 left-20 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">Get Quote</h1>
-              <p className="text-xl text-gray-300 mb-8">
+              <div className="animate-fade-in inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-5 py-2 mb-6">
+                <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
+                <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Request Pricing</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Get <span className="text-accent-orange">Quote</span></h1>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Request a customized quote for your steel requirements
               </p>
+              <div className="flex justify-center gap-6 text-sm text-gray-300">
+                <div className="flex items-center gap-2"><span className="w-2 h-2 bg-green-400 rounded-full"></span> Free Quotation</div>
+                <div className="flex items-center gap-2"><span className="w-2 h-2 bg-accent-orange rounded-full"></span> 24hr Response</div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Quote Form */}
-        <section className="py-16">
+        <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-white shadow-lg rounded-lg p-8">
-                <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Request a Quote</h2>
-                  <p className="text-gray-600">
+              <div className="bg-white shadow-lg rounded-3xl p-8 md:p-12 border border-gray-100 relative overflow-hidden">
+                {/* Accent bar */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-orange via-accent-orange-light to-accent-orange"></div>
+
+                <div className="mb-10">
+                  <h2 className="text-3xl font-extrabold text-steel-blue mb-3">Request a Quote</h2>
+                  <p className="text-gray-500 text-lg">
                     Fill out the form below with your requirements, and our sales team will provide you
                     with a competitive quote within 24 hours.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Personal Information */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Product Information */}
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Section 1: Your Details */}
                   <div>
-                    <label htmlFor="productType" className="block text-sm font-medium text-gray-700 mb-2">
-                      Product Type *
-                    </label>
-                    <select
-                      id="productType"
-                      name="productType"
-                      required
-                      value={formData.productType}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                    >
-                      <option value="">Select product type</option>
-                      <option value="steel-beams">Steel I-Beams</option>
-                      <option value="steel-rods">Steel Rods (TMT Bars)</option>
-                      <option value="steel-sheets">Steel Sheets</option>
-                      <option value="steel-pipes">Steel Pipes</option>
-                      <option value="steel-angles">Steel Angles</option>
-                      <option value="steel-channels">Steel Channels</option>
-                      <option value="steel-plates">Steel Plates</option>
-                      <option value="steel-wire">Steel Wire</option>
-                      <option value="custom">Custom Product</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="specifications" className="block text-sm font-medium text-gray-700 mb-2">
-                      Product Specifications *
-                    </label>
-                    <textarea
-                      id="specifications"
-                      name="specifications"
-                      rows={4}
-                      required
-                      value={formData.specifications}
-                      onChange={handleChange}
-                      placeholder="Please specify dimensions, grade, quantity, and any special requirements..."
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    ></textarea>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-2">
-                        Quantity Required *
-                      </label>
-                      <input
-                        type="text"
-                        id="quantity"
-                        name="quantity"
-                        required
-                        value={formData.quantity}
-                        onChange={handleChange}
-                        placeholder="e.g., 10 tons, 500 pieces, etc."
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-lg flex items-center justify-center text-white text-sm font-bold shadow">1</div>
+                      <h3 className="text-lg font-bold text-steel-blue">Your Details</h3>
                     </div>
-
-                    <div>
-                      <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700 mb-2">
-                        Required Delivery Date
-                      </label>
-                      <input
-                        type="date"
-                        id="deliveryDate"
-                        name="deliveryDate"
-                        value={formData.deliveryDate}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                      />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pl-11">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                        <input type="text" id="name" name="name" required value={formData.name} onChange={handleChange} placeholder="John Doe" className={inputClasses} />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} placeholder="john@company.com" className={inputClasses} />
+                      </div>
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className={inputClasses} />
+                      </div>
+                      <div>
+                        <label htmlFor="company" className="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
+                        <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} placeholder="Your Company" className={inputClasses} />
+                      </div>
                     </div>
                   </div>
 
+                  {/* Divider */}
+                  <div className="border-t border-gray-100"></div>
+
+                  {/* Section 2: Product Requirements */}
                   <div>
-                    <label htmlFor="deliveryLocation" className="block text-sm font-medium text-gray-700 mb-2">
-                      Delivery Location *
-                    </label>
-                    <input
-                      type="text"
-                      id="deliveryLocation"
-                      name="deliveryLocation"
-                      required
-                      value={formData.deliveryLocation}
-                      onChange={handleChange}
-                      placeholder="Complete delivery address"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-accent-orange to-accent-orange-dark rounded-lg flex items-center justify-center text-white text-sm font-bold shadow">2</div>
+                      <h3 className="text-lg font-bold text-steel-blue">Product Requirements</h3>
+                    </div>
+                    <div className="space-y-5 pl-11">
+                      <div>
+                        <label htmlFor="productType" className="block text-sm font-semibold text-gray-700 mb-2">Product Type *</label>
+                        <select id="productType" name="productType" required value={formData.productType} onChange={handleChange} className={inputClasses}>
+                          <option value="">Select product type</option>
+                          <option value="steel-beams">Steel I-Beams</option>
+                          <option value="steel-rods">Steel Rods (TMT Bars)</option>
+                          <option value="steel-sheets">Steel Sheets</option>
+                          <option value="steel-pipes">Steel Pipes</option>
+                          <option value="steel-angles">Steel Angles</option>
+                          <option value="steel-channels">Steel Channels</option>
+                          <option value="steel-plates">Steel Plates</option>
+                          <option value="steel-wire">Steel Wire</option>
+                          <option value="custom">Custom Product</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="specifications" className="block text-sm font-semibold text-gray-700 mb-2">Product Specifications *</label>
+                        <textarea id="specifications" name="specifications" rows={4} required value={formData.specifications} onChange={handleChange} placeholder="Please specify dimensions, grade, quantity, and any special requirements..." className={inputClasses + " resize-none"}></textarea>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                          <label htmlFor="quantity" className="block text-sm font-semibold text-gray-700 mb-2">Quantity Required *</label>
+                          <input type="text" id="quantity" name="quantity" required value={formData.quantity} onChange={handleChange} placeholder="e.g., 10 tons, 500 pieces" className={inputClasses} />
+                        </div>
+                        <div>
+                          <label htmlFor="deliveryDate" className="block text-sm font-semibold text-gray-700 mb-2">Required Delivery Date</label>
+                          <input type="date" id="deliveryDate" name="deliveryDate" value={formData.deliveryDate} onChange={handleChange} className={inputClasses} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Divider */}
+                  <div className="border-t border-gray-100"></div>
+
+                  {/* Section 3: Delivery & Notes */}
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Additional Requirements
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Any additional information or special requirements..."
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    ></textarea>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-lg flex items-center justify-center text-white text-sm font-bold shadow">3</div>
+                      <h3 className="text-lg font-bold text-steel-blue">Delivery & Additional Info</h3>
+                    </div>
+                    <div className="space-y-5 pl-11">
+                      <div>
+                        <label htmlFor="deliveryLocation" className="block text-sm font-semibold text-gray-700 mb-2">Delivery Location *</label>
+                        <input type="text" id="deliveryLocation" name="deliveryLocation" required value={formData.deliveryLocation} onChange={handleChange} placeholder="Complete delivery address" className={inputClasses} />
+                      </div>
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">Additional Requirements</label>
+                        <textarea id="message" name="message" rows={3} value={formData.message} onChange={handleChange} placeholder="Any additional information or special requirements..." className={inputClasses + " resize-none"}></textarea>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 mb-2">What happens next?</h3>
-                    <ul className="text-gray-600 space-y-1">
-                      <li>• Our sales team will review your requirements</li>
-                      <li>• You'll receive a detailed quote within 24 hours</li>
-                      <li>• We'll schedule a call to discuss your project</li>
-                      <li>• We'll provide delivery timeline and payment terms</li>
-                    </ul>
+                  {/* What happens next */}
+                  <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-100">
+                    <h3 className="font-bold text-steel-blue mb-3 flex items-center gap-2">
+                      <span className="text-lg">📋</span> What happens next?
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {[
+                        { icon: '✅', text: 'Our sales team reviews your requirements' },
+                        { icon: '📧', text: 'Detailed quote within 24 hours' },
+                        { icon: '📞', text: 'Call to discuss your project' },
+                        { icon: '🚚', text: 'Delivery timeline & payment terms' }
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2 text-gray-600 text-sm">
+                          <span>{item.icon}</span> {item.text}
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {submitStatus && (
-                    <div className={`p-4 rounded-lg ${
+                    <div className={`p-5 rounded-2xl flex items-start gap-3 ${
                       submitStatus.type === 'success'
                         ? 'bg-green-50 text-green-800 border border-green-200'
                         : 'bg-red-50 text-red-800 border border-red-200'
                     }`}>
-                      {submitStatus.message}
-                      {submitStatus.quoteId && (
-                        <p className="mt-2 text-sm">Quote ID: <strong>{submitStatus.quoteId}</strong></p>
-                      )}
+                      <span className="text-xl flex-shrink-0">{submitStatus.type === 'success' ? '✅' : '❌'}</span>
+                      <div>
+                        {submitStatus.message}
+                        {submitStatus.quoteId && (
+                          <p className="mt-2 text-sm">Quote ID: <strong>{submitStatus.quoteId}</strong></p>
+                        )}
+                      </div>
                     </div>
                   )}
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group w-full bg-gradient-to-r from-accent-orange to-accent-orange-dark text-white py-4 px-6 rounded-xl hover:shadow-lg hover:shadow-accent-orange/30 transition-all duration-300 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:-translate-y-0.5"
                   >
-                    {submitting ? 'Submitting...' : 'Request Quote'}
+                    {submitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        Request Quote
+                        <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
 
-              {/* Contact Information */}
-              <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-blue-50 rounded-lg">
-                  <svg className="w-8 h-8 text-blue-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                  </svg>
-                  <h3 className="font-semibold text-gray-900">Call Us</h3>
-                  <p className="text-gray-600 text-sm">+91 98765 43210</p>
-                </div>
-
-                <div className="text-center p-6 bg-blue-50 rounded-lg">
-                  <svg className="w-8 h-8 text-blue-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                  <h3 className="font-semibold text-gray-900">Email Us</h3>
-                  <p className="text-gray-600 text-sm">sales@vighnahartasteel.com</p>
-                </div>
-
-                <div className="text-center p-6 bg-blue-50 rounded-lg">
-                  <svg className="w-8 h-8 text-blue-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  <h3 className="font-semibold text-gray-900">Response Time</h3>
-                  <p className="text-gray-600 text-sm">Within 24 hours</p>
-                </div>
+              {/* Bottom Info Cards */}
+              <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { icon: '📞', title: 'Call Us', detail: '+91 98765 43210', sub: 'Mon-Sat, 9AM-6PM' },
+                  { icon: '✉️', title: 'Email Us', detail: 'sales@vighnahartasteel.com', sub: 'Quick response guaranteed' },
+                  { icon: '⏰', title: 'Response Time', detail: 'Within 24 Hours', sub: 'Business days' }
+                ].map((item, i) => (
+                  <div key={i} className="group text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="text-3xl mb-3 group-hover:scale-125 transition-transform duration-300">{item.icon}</div>
+                    <h3 className="font-bold text-steel-blue mb-1">{item.title}</h3>
+                    <p className="text-accent-orange font-semibold text-sm">{item.detail}</p>
+                    <p className="text-gray-400 text-xs mt-1">{item.sub}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -344,5 +292,3 @@ export default function Quote() {
     </>
   );
 }
-
-

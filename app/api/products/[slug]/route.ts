@@ -5,7 +5,7 @@ const productDetails: Record<string, any> = {
   'steel-i-beams': {
     id: '1',
     name: 'Steel I-Beams',
-    image: '/assets/images/steel-beam.svg',
+    image: '/assets/images/steel-beam.png',
     description: 'High-strength structural steel I-beams perfect for construction projects. These beams are manufactured using premium quality steel and are designed to provide excellent structural support for buildings, bridges, and industrial structures.',
     price: 'From ₹45/kg',
     specifications: [
@@ -40,7 +40,7 @@ const productDetails: Record<string, any> = {
   'steel-rods': {
     id: '2',
     name: 'Steel Rods (TMT Bars)',
-    image: '/assets/images/steel-rod.svg',
+    image: '/assets/images/steel-rod.png',
     description: 'Premium quality TMT (Thermo Mechanically Treated) steel rods for reinforcement in concrete structures. Our TMT bars offer superior strength, ductility, and corrosion resistance.',
     price: 'From ₹52/kg',
     specifications: [
@@ -75,7 +75,7 @@ const productDetails: Record<string, any> = {
   'steel-sheets': {
     id: '3',
     name: 'Steel Sheets',
-    image: '/assets/images/steel-sheet.svg',
+    image: '/assets/images/steel-sheet.png',
     description: 'High-quality steel sheets suitable for roofing, cladding, and various industrial applications. Available in galvanized and cold-rolled options with excellent corrosion resistance.',
     price: 'From ₹65/kg',
     specifications: [
@@ -110,7 +110,7 @@ const productDetails: Record<string, any> = {
   'steel-pipes': {
     id: '4',
     name: 'Steel Pipes',
-    image: '/assets/images/steel-pipe.svg',
+    image: '/assets/images/steel-pipe.png',
     description: 'Seamless and welded steel pipes for water supply, gas lines, and structural applications. Manufactured to meet international standards with excellent durability.',
     price: 'From ₹58/kg',
     specifications: [
@@ -140,6 +140,146 @@ const productDetails: Record<string, any> = {
     metadata: {
       title: 'Steel Pipes - ERW & Seamless | Vighnaharta Steel',
       description: 'Quality steel pipes for plumbing and industrial use. IS 1239 grade with excellent pressure resistance.'
+    }
+  },
+  'steel-angles': {
+    id: '5',
+    name: 'Steel Angles',
+    image: '/assets/images/steel-beam.png',
+    description: 'L-shaped steel angles used in construction and fabrication work. Available in equal and unequal angle configurations with precise dimensions and consistent quality.',
+    price: 'From ₹48/kg',
+    specifications: [
+      { label: 'Size Range', value: '20x20mm to 200x200mm' },
+      { label: 'Thickness', value: '3mm - 20mm' },
+      { label: 'Length', value: '6m, 12m' },
+      { label: 'Grade', value: 'IS 2062' },
+      { label: 'Type', value: 'Equal & Unequal' },
+      { label: 'Surface Finish', value: 'Hot Rolled' }
+    ],
+    features: [
+      'High structural strength',
+      'Precise dimensional accuracy',
+      'Easy to weld and cut',
+      'Versatile for multiple applications',
+      'IS certified quality'
+    ],
+    applications: [
+      'Structural framework construction',
+      'Tower and transmission line fabrication',
+      'Industrial shelving and racks',
+      'Machine and equipment frames',
+      'Bridge components and supports'
+    ],
+    category: 'Structural Steel',
+    slug: 'steel-angles',
+    metadata: {
+      title: 'Steel Angles - Equal & Unequal L-Angles | Vighnaharta Steel',
+      description: 'Premium quality L-shaped steel angles for construction and fabrication. Available in 20x20mm to 200x200mm sizes.'
+    }
+  },
+  'steel-channels': {
+    id: '6',
+    name: 'Steel Channels',
+    image: '/assets/images/steel-beam.png',
+    description: 'C-shaped steel channels for structural applications. Ideal for framework, supports, and general construction purposes with excellent load-bearing capacity.',
+    price: 'From ₹50/kg',
+    specifications: [
+      { label: 'Size Range', value: '75mm - 400mm' },
+      { label: 'Weight', value: '6.8 kg/m to 50.1 kg/m' },
+      { label: 'Length', value: '12m standard' },
+      { label: 'Grade', value: 'IS 808' },
+      { label: 'Type', value: 'Parallel Flange / Tapered' },
+      { label: 'Surface Finish', value: 'Hot Rolled' }
+    ],
+    features: [
+      'High load-bearing capacity',
+      'Uniform dimensions throughout',
+      'Excellent weldability',
+      'Versatile C-shape profile',
+      'Compliant with IS standards'
+    ],
+    applications: [
+      'Building framework and purlins',
+      'Vehicle chassis and body frames',
+      'Industrial conveyor structures',
+      'Platform and walkway supports',
+      'General fabrication work'
+    ],
+    category: 'Structural Steel',
+    slug: 'steel-channels',
+    metadata: {
+      title: 'Steel Channels - C-Section Structural Steel | Vighnaharta Steel',
+      description: 'Quality C-shaped steel channels for structural applications. IS 808 grade, available in 75mm to 400mm sizes.'
+    }
+  },
+  'steel-plates': {
+    id: '7',
+    name: 'Steel Plates',
+    image: '/assets/images/steel-sheet.png',
+    description: 'Heavy-duty steel plates for industrial machinery, shipbuilding, and heavy construction. Available in various grades and thicknesses with excellent mechanical properties.',
+    price: 'From ₹55/kg',
+    specifications: [
+      { label: 'Thickness', value: '6mm - 100mm' },
+      { label: 'Size', value: 'Up to 3000x12000mm' },
+      { label: 'Grade', value: 'IS 2062, IS 2025' },
+      { label: 'Surface', value: 'Hot Rolled, Shot Blasted' },
+      { label: 'Tensile Strength', value: '410-540 N/mm²' },
+      { label: 'Yield Strength', value: '250-350 N/mm²' }
+    ],
+    features: [
+      'High tensile and yield strength',
+      'Excellent impact resistance',
+      'Superior surface quality',
+      'Wide range of thicknesses',
+      'Multiple grade options'
+    ],
+    applications: [
+      'Pressure vessel manufacturing',
+      'Shipbuilding and marine structures',
+      'Heavy machinery bases',
+      'Structural steel fabrication',
+      'Industrial storage tanks'
+    ],
+    category: 'Sheet & Plates',
+    slug: 'steel-plates',
+    metadata: {
+      title: 'Steel Plates - Heavy Duty Industrial Grade | Vighnaharta Steel',
+      description: 'Heavy-duty steel plates for industrial and construction applications. Available in 6mm-100mm thickness with multiple grade options.'
+    }
+  },
+  'steel-wire': {
+    id: '8',
+    name: 'Steel Wire',
+    image: '/assets/images/steel-rod.png',
+    description: 'High-tensile steel wire for various applications including binding, fencing, and reinforcement work. Available in different gauges and coatings for diverse requirements.',
+    price: 'From ₹60/kg',
+    specifications: [
+      { label: 'Diameter', value: '0.5mm - 12mm' },
+      { label: 'Tensile Strength', value: '300-1800 N/mm²' },
+      { label: 'Coating', value: 'Galvanized, Black' },
+      { label: 'Grade', value: 'IS 280, IS 4454' },
+      { label: 'Type', value: 'HB, MS, GI' },
+      { label: 'Packing', value: 'Coils, Bundles' }
+    ],
+    features: [
+      'High tensile strength',
+      'Excellent flexibility',
+      'Corrosion resistant options',
+      'Consistent diameter throughout',
+      'Available in multiple gauges'
+    ],
+    applications: [
+      'Binding wire for construction',
+      'Fencing and barbed wire',
+      'Spring manufacturing',
+      'Reinforcement in masonry',
+      'Industrial fastening applications'
+    ],
+    category: 'Reinforcement Steel',
+    slug: 'steel-wire',
+    metadata: {
+      title: 'Steel Wire - High Tensile Binding & Fencing Wire | Vighnaharta Steel',
+      description: 'Premium steel wire for binding, fencing and reinforcement. Available in 0.5mm-12mm diameter with galvanized coating options.'
     }
   }
 };

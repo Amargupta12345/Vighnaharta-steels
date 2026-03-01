@@ -5,7 +5,7 @@ const mockProducts = [
   {
     id: '1',
     name: 'Steel I-Beams',
-    image: '/assets/images/steel-beam.svg',
+    image: '/assets/images/steel-beam.png',
     description: 'High-strength structural steel I-beams perfect for construction projects. Available in various sizes and specifications to meet diverse structural requirements.',
     price: 'From ₹45/kg',
     specifications: [
@@ -21,7 +21,7 @@ const mockProducts = [
   {
     id: '2',
     name: 'Steel Rods (TMT Bars)',
-    image: '/assets/images/steel-rod.svg',
+    image: '/assets/images/steel-rod.png',
     description: 'Premium quality TMT (Thermo Mechanically Treated) steel rods for reinforcement in concrete structures. Superior strength and corrosion resistance.',
     price: 'From ₹52/kg',
     specifications: [
@@ -37,7 +37,7 @@ const mockProducts = [
   {
     id: '3',
     name: 'Steel Sheets',
-    image: '/assets/images/steel-sheet.svg',
+    image: '/assets/images/steel-sheet.png',
     description: 'High-quality steel sheets suitable for roofing, cladding, and various industrial applications. Available in galvanized and cold-rolled options.',
     price: 'From ₹65/kg',
     specifications: [
@@ -53,7 +53,7 @@ const mockProducts = [
   {
     id: '4',
     name: 'Steel Pipes',
-    image: '/assets/images/steel-pipe.svg',
+    image: '/assets/images/steel-pipe.png',
     description: 'Seamless and welded steel pipes for water supply, gas lines, and structural applications. Compliant with international standards.',
     price: 'From ₹58/kg',
     specifications: [
@@ -69,7 +69,7 @@ const mockProducts = [
   {
     id: '5',
     name: 'Steel Angles',
-    image: '/assets/images/steel-beam.svg',
+    image: '/assets/images/steel-beam.png',
     description: 'L-shaped steel angles used in construction and fabrication work. Available in equal and unequal angle configurations.',
     price: 'From ₹48/kg',
     specifications: [
@@ -85,7 +85,7 @@ const mockProducts = [
   {
     id: '6',
     name: 'Steel Channels',
-    image: '/assets/images/steel-beam.svg',
+    image: '/assets/images/steel-beam.png',
     description: 'C-shaped steel channels for structural applications. Ideal for framework, supports, and general construction purposes.',
     price: 'From ₹50/kg',
     specifications: [
@@ -101,7 +101,7 @@ const mockProducts = [
   {
     id: '7',
     name: 'Steel Plates',
-    image: '/assets/images/steel-sheet.svg',
+    image: '/assets/images/steel-sheet.png',
     description: 'Heavy-duty steel plates for industrial machinery, shipbuilding, and heavy construction. Available in various grades and thicknesses.',
     price: 'From ₹55/kg',
     specifications: [
@@ -117,7 +117,7 @@ const mockProducts = [
   {
     id: '8',
     name: 'Steel Wire',
-    image: '/assets/images/steel-rod.svg',
+    image: '/assets/images/steel-rod.png',
     description: 'High-tensile steel wire for various applications including binding, fencing, and reinforcement work. Available in different gauges.',
     price: 'From ₹60/kg',
     specifications: [

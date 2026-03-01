@@ -1,2 +1,10 @@
 node_modules/
 .next/
+
+# local env files (contains secrets like MONGODB_URI)
+.env*.local
+
+# misc
+.DS_Store
+.vercel
+*.tsbuildinfo

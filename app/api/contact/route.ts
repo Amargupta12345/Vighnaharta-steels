@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import connectDB from '../../../lib/mongodb';
+import ContactSubmission from '../../../models/ContactSubmission';
 
 // POST /api/contact - Submit contact form
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+
     const body = await request.json();
     const { name, email, phone, company, subject, message } = body;
 
@@ -26,37 +30,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production, you would:
-    // 1. Save to database
-    // 2. Send email notification
-    // 3. Send auto-reply to customer
-
-    const contactSubmission = {
-      id: Date.now().toString(),
+    // Save to MongoDB
+    const contactSubmission = await ContactSubmission.create({
       name,
       email,
       phone: phone || '',
       company: company || '',
       subject,
       message,
-      submittedAt: new Date().toISOString(),
-      status: 'pending'
-    };
+      status: 'pending',
+    });
 
-    // Mock: Save to database (replace with actual database call)
-    // await saveContactSubmission(contactSubmission);
-
-    // Mock: Send email (replace with actual email service)
-    // await sendContactEmail(contactSubmission);
-
-    console.log('Contact form submission:', contactSubmission);
+    console.log('✅ Contact saved to MongoDB:', contactSubmission._id);
 
     return NextResponse.json({
       success: true,
       message: 'Thank you for your message. We will get back to you soon!',
       data: {
-        id: contactSubmission.id,
-        submittedAt: contactSubmission.submittedAt
+        id: contactSubmission._id,
+        submittedAt: contactSubmission.createdAt
       }
     }, { status: 201 });
   } catch (error) {
@@ -68,9 +60,24 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET /api/contact - Get contact information
-export async function GET() {
+// GET /api/contact - Get contact information or all submissions
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const listSubmissions = searchParams.get('submissions');
+
+    // If ?submissions=true, return all contact submissions from DB
+    if (listSubmissions === 'true') {
+      await connectDB();
+      const submissions = await ContactSubmission.find().sort({ createdAt: -1 });
+      return NextResponse.json({
+        success: true,
+        count: submissions.length,
+        data: submissions
+      });
+    }
+
+    // Default: return contact information (no DB needed)
     const contactInfo = {
       address: {
         street: "123 Industrial Area, Sector 45",
@@ -102,7 +109,7 @@ export async function GET() {
     });
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch contact information' },
+      { success: false, error: 'Failed to fetch data' },
       { status: 500 }
     );
   }
