@@ -71,10 +71,14 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            Trending Products
+          <div className="inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-4 py-1 mb-3">
+            <span className="w-1.5 h-1.5 bg-accent-orange rounded-full animate-pulse"></span>
+            <span className="text-[11px] font-semibold text-accent-orange-light tracking-wider uppercase">Hot Picks</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-1">
+            Trending <span className="text-accent-orange">Products</span>
           </h2>
-          <p className="text-gray-300">
+          <p className="text-gray-300 text-sm">
             Most popular steel products in high demand
           </p>
         </div>
@@ -82,20 +86,20 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
         <div className="hidden md:flex gap-2">
           <button
             onClick={goToPrevious}
-            className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
+            className="group w-11 h-11 bg-white/10 hover:bg-accent-orange rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-accent-orange hover:scale-110 hover:shadow-lg hover:shadow-accent-orange/40"
             aria-label="Previous products"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            <svg className="w-5 h-5 text-white transform group-hover:-translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={goToNext}
-            className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
+            className="group w-11 h-11 bg-white/10 hover:bg-accent-orange rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-accent-orange hover:scale-110 hover:shadow-lg hover:shadow-accent-orange/40"
             aria-label="Next products"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            <svg className="w-5 h-5 text-white transform group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
@@ -118,26 +122,38 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
                 key={slideIndex}
                 className="w-full flex-shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 px-2"
               >
-                {slideProducts.map((product) => (
+                {slideProducts.map((product, idx) => (
                   <div
                     key={product.id}
-                    className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:bg-white/20 transition-all duration-300 border border-white/20 shadow-lg"
+                    className="group relative bg-white/10 backdrop-blur-md rounded-2xl p-5 hover:bg-white/15 hover:-translate-y-2 transition-all duration-500 border border-white/20 hover:border-accent-orange/50 shadow-lg hover:shadow-2xl hover:shadow-accent-orange/20 overflow-hidden animate-slide-up-fade opacity-0"
+                    style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'forwards' }}
                   >
+                    {/* Hover gradient glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent-orange/0 to-accent-orange/0 group-hover:from-accent-orange/10 group-hover:to-transparent transition-all duration-500 rounded-2xl pointer-events-none"></div>
+
                     {/* Product Image */}
-                    <div className="relative h-48 w-full mb-4 bg-white/20 rounded-lg overflow-hidden">
+                    <div className="relative h-48 w-full mb-4 bg-white/20 rounded-xl overflow-hidden">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-cover rounded-lg"
+                        className="object-cover rounded-xl transition-transform duration-700 group-hover:scale-110"
                         sizes={ImageSizes.carousel.sizes}
                         quality={85}
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-steel-blue/40 via-transparent to-transparent"></div>
+                      {/* Trending badge */}
+                      <div className="absolute top-2 right-2 bg-gradient-to-r from-accent-orange to-accent-orange-dark text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/>
+                        </svg>
+                        Hot
+                      </div>
                     </div>
 
                     {/* Product Info */}
-                    <div>
-                      <h3 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                    <div className="relative">
+                      <h3 className="text-lg font-bold text-white mb-2 line-clamp-1 group-hover:text-accent-orange-light transition-colors duration-300">
                         {product.name}
                       </h3>
                       <p className="text-gray-200 text-sm mb-3 line-clamp-2">
@@ -145,8 +161,8 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
                       </p>
 
                       {product.price && (
-                        <div className="text-accent-orange font-semibold mb-4">
-                          {product.price}
+                        <div className="inline-flex items-center gap-1.5 bg-accent-orange/15 border border-accent-orange/30 rounded-lg px-3 py-1 mb-4">
+                          <span className="text-accent-orange font-bold text-sm">{product.price}</span>
                         </div>
                       )}
 
@@ -154,13 +170,13 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
                       <div className="flex gap-2">
                         <Link
                           href={`/product/${product.slug}`}
-                          className="flex-1 bg-steel-blue hover:bg-steel-blue-dark text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm text-center"
+                          className="flex-1 bg-white/10 hover:bg-white border border-white/30 hover:border-white text-white hover:text-steel-blue px-4 py-2 rounded-lg transition-all duration-300 font-semibold text-sm text-center backdrop-blur-sm"
                         >
                           View Details
                         </Link>
                         <Link
                           href="/quote"
-                          className="flex-1 bg-accent-orange hover:bg-accent-orange-dark text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm text-center"
+                          className="flex-1 bg-gradient-to-r from-accent-orange to-accent-orange-dark hover:shadow-lg hover:shadow-accent-orange/40 text-white px-4 py-2 rounded-lg transition-all duration-300 font-semibold text-sm text-center"
                         >
                           Get Quote
                         </Link>
@@ -192,10 +208,10 @@ const TrendingProductsCarousel: React.FC<TrendingProductsCarouselProps> = ({ pro
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-accent-orange w-8'
-                  : 'bg-white/40 w-2 hover:bg-white/60'
+                  ? 'bg-gradient-to-r from-accent-orange to-accent-orange-light w-10 shadow-md shadow-accent-orange/40'
+                  : 'bg-white/40 w-2 hover:bg-white/70 hover:w-4 hover:scale-125'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

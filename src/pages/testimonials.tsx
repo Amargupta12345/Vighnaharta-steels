@@ -37,30 +37,40 @@ export default function TestimonialsPage() {
 
         {/* Hero Section */}
         <section className="relative pt-32 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white py-28 overflow-hidden">
-          <div className="absolute top-20 right-10 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-20 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+          {/* Industrial grid pattern */}
+          <div className="absolute inset-0 bg-industrial-grid opacity-40"></div>
+          {/* Animated blur orbs */}
+          <div className="absolute top-20 right-10 w-72 h-72 bg-accent-orange/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-steel-blue-500/20 rounded-full blur-3xl"></div>
           <div className="relative container mx-auto px-4 text-center">
             <div className="animate-fade-in inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-5 py-2 mb-6">
               <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
               <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Client Reviews</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
+            <h1 className="animate-slide-up font-display font-black text-5xl md:text-7xl uppercase tracking-tight mb-6">
               Customer <span className="text-accent-orange">Testimonials</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+            <p className="animate-slide-up text-xl text-gray-300 max-w-2xl mx-auto mb-10" style={{ animationDelay: '150ms' }}>
               Discover what our clients say about working with Vighnaharta Steel Industries
             </p>
             {/* Rating summary */}
-            <div className="inline-flex items-center gap-4 glass rounded-2xl px-8 py-4">
+            <div className="animate-slide-up inline-flex items-center gap-4 glass rounded-2xl px-8 py-5 shadow-2xl hover:shadow-accent-orange/20 hover:-translate-y-1 transition-all duration-500" style={{ animationDelay: '300ms' }}>
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-accent-orange" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    key={i}
+                    className="w-6 h-6 text-accent-orange drop-shadow-[0_0_8px_rgba(255,111,0,0.5)] animate-slide-up-fade opacity-0"
+                    style={{ animationDelay: `${400 + i * 80}ms`, animationFillMode: 'forwards' }}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
               <div className="text-left">
-                <div className="text-xl font-extrabold">4.9 / 5.0</div>
+                <div className="text-2xl font-extrabold bg-gradient-to-r from-white to-accent-orange-light bg-clip-text text-transparent">4.9 / 5.0</div>
                 <div className="text-gray-300 text-sm">Based on 500+ reviews</div>
               </div>
             </div>
@@ -107,7 +117,7 @@ export default function TestimonialsPage() {
                 <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Join Us</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+              <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight mb-4">
                 Ready to Join Our <span className="text-accent-orange">Satisfied</span> Customers?
               </h2>
               <p className="text-xl mb-10 opacity-80 max-w-2xl mx-auto">

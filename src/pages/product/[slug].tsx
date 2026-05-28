@@ -140,7 +140,7 @@ export default function ProductDetail() {
                   <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                   <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Product Details</span>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-extrabold text-steel-blue mb-4">{product.name}</h1>
+                <h1 className="font-display font-black text-4xl md:text-5xl tracking-tight text-steel-blue mb-4">{product.name}</h1>
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">{product.description}</p>
 
                 {/* Price tag */}
@@ -175,26 +175,42 @@ export default function ProductDetail() {
         </section>
 
         {/* Product Details - Specs, Features, Applications */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="relative py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+          {/* Decorative orbs */}
+          <div className="absolute top-20 right-10 w-72 h-72 bg-accent-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-20 left-10 w-72 h-72 bg-steel-blue/5 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Specifications */}
               {product.specifications && product.specifications.length > 0 && (
-                <div className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden relative">
+                <div
+                  className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-steel-blue/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden relative animate-slide-up-fade opacity-0"
+                  style={{ animationDelay: '0ms', animationFillMode: 'forwards' }}
+                >
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-steel-blue to-steel-blue-dark rounded-t-3xl"></div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-xl flex items-center justify-center">
-                      <span className="text-white text-lg">📊</span>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-steel-blue/10 to-transparent rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="flex items-center gap-3 mb-6 relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      <span className="text-white text-xl">📊</span>
                     </div>
-                    <h2 className="text-xl font-extrabold text-steel-blue">Technical Specs</h2>
+                    <div>
+                      <h2 className="text-xl font-extrabold text-steel-blue">Technical Specs</h2>
+                      <div className="text-xs text-gray-500 font-medium">Detailed parameters</div>
+                    </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2 relative">
                     {product.specifications.map((spec: any, index: number) => (
-                      <div key={index} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 px-2 -mx-2 rounded-lg transition-colors">
+                      <div
+                        key={index}
+                        className="flex justify-between items-center py-3 px-3 -mx-1 border-b border-gray-100 last:border-0 hover:bg-gradient-to-r hover:from-steel-blue/5 hover:to-transparent rounded-lg transition-all duration-300 animate-slide-up-fade opacity-0"
+                        style={{ animationDelay: `${150 + index * 60}ms`, animationFillMode: 'forwards' }}
+                      >
                         <span className="font-semibold text-gray-700 text-sm">
                           {typeof spec === 'object' ? spec.label : 'Specification'}
                         </span>
-                        <span className="text-gray-600 text-sm font-medium bg-gray-100 px-3 py-1 rounded-lg">
+                        <span className="text-steel-blue text-sm font-bold bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200 px-3 py-1 rounded-lg">
                           {typeof spec === 'object' ? spec.value : spec}
                         </span>
                       </div>
@@ -205,23 +221,35 @@ export default function ProductDetail() {
 
               {/* Features */}
               {product.features && product.features.length > 0 && (
-                <div className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden relative">
+                <div
+                  className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-accent-orange/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden relative animate-slide-up-fade opacity-0"
+                  style={{ animationDelay: '120ms', animationFillMode: 'forwards' }}
+                >
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-orange to-accent-orange-light rounded-t-3xl"></div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-br from-accent-orange to-accent-orange-dark rounded-xl flex items-center justify-center">
-                      <span className="text-white text-lg">✨</span>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent-orange/10 to-transparent rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="flex items-center gap-3 mb-6 relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-accent-orange to-accent-orange-dark rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      <span className="text-white text-xl">✨</span>
                     </div>
-                    <h2 className="text-xl font-extrabold text-steel-blue">Key Features</h2>
+                    <div>
+                      <h2 className="text-xl font-extrabold text-steel-blue">Key Features</h2>
+                      <div className="text-xs text-gray-500 font-medium">What makes it premium</div>
+                    </div>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 relative">
                     {product.features.map((feature: string, index: number) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 animate-slide-up-fade opacity-0"
+                        style={{ animationDelay: `${270 + index * 60}ms`, animationFillMode: 'forwards' }}
+                      >
+                        <div className="w-7 h-7 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                           <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
                           </svg>
                         </div>
-                        <span className="text-gray-600">{feature}</span>
+                        <span className="text-gray-700 leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -230,23 +258,35 @@ export default function ProductDetail() {
 
               {/* Applications */}
               {product.applications && product.applications.length > 0 && (
-                <div className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden relative">
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-steel-blue to-accent-orange rounded-t-3xl"></div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-br from-steel-blue to-accent-orange rounded-xl flex items-center justify-center">
-                      <span className="text-white text-lg">🏗️</span>
+                <div
+                  className="group bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-accent-orange/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden relative animate-slide-up-fade opacity-0"
+                  style={{ animationDelay: '240ms', animationFillMode: 'forwards' }}
+                >
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-steel-blue via-accent-orange to-steel-blue rounded-t-3xl"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-steel-blue/5 via-accent-orange/5 to-transparent rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="flex items-center gap-3 mb-6 relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-accent-orange rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      <span className="text-white text-xl">🏗️</span>
                     </div>
-                    <h2 className="text-xl font-extrabold text-steel-blue">Applications</h2>
+                    <div>
+                      <h2 className="text-xl font-extrabold text-steel-blue">Applications</h2>
+                      <div className="text-xs text-gray-500 font-medium">Where it&apos;s used</div>
+                    </div>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 relative">
                     {product.applications.map((application: string, index: number) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 animate-slide-up-fade opacity-0"
+                        style={{ animationDelay: `${390 + index * 60}ms`, animationFillMode: 'forwards' }}
+                      >
+                        <div className="w-7 h-7 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                           <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"/>
                           </svg>
                         </div>
-                        <span className="text-gray-600">{application}</span>
+                        <span className="text-gray-700 leading-relaxed">{application}</span>
                       </li>
                     ))}
                   </ul>
@@ -265,7 +305,7 @@ export default function ProductDetail() {
               <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
               <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Get Started</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+            <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight mb-4">
               Interested in <span className="text-accent-orange">{product.name}</span>?
             </h2>
             <p className="text-xl mb-10 opacity-80 max-w-2xl mx-auto">

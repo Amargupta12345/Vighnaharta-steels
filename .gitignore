@@ -7,4 +7,5 @@ node_modules/
 # misc
 .DS_Store
 .vercel
+.claude/
 *.tsbuildinfo

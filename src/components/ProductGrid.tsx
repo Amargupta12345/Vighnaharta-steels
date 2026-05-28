@@ -25,24 +25,31 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4">
+    <section className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      {/* Decorative blur orbs */}
+      <div className="absolute top-32 right-0 w-96 h-96 bg-accent-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-32 left-0 w-96 h-96 bg-steel-blue/5 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(46,58,89,1) 1px, transparent 1px), linear-gradient(90deg, rgba(46,58,89,1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}></div>
+
+      <div className="relative container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
             <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
             <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Our Catalog</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
+          <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight text-steel-blue mb-4">
             {title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {description}
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-accent-orange to-steel-blue rounded-full mx-auto mt-6"></div>
         </div>
 
         <div className={`grid ${gridCols[columns]} gap-8`}>
-          {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+          {products.map((product, idx) => (
+            <ProductCard key={product.id} index={idx} {...product} />
           ))}
         </div>
 

@@ -9,7 +9,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Brand Colors - Vighnaharta Steel Corporation
         'steel-blue': {
           DEFAULT: '#2E3A59',
           50: '#e8eaf0',
@@ -17,27 +16,27 @@ module.exports = {
           200: '#9ea4b5',
           300: '#777f96',
           400: '#5a637a',
-          500: '#2E3A59', // Primary brand color
+          500: '#2E3A59',
           600: '#262f47',
           700: '#1e2535',
           800: '#161b23',
           900: '#0e1111',
-          'dark': '#1e2535', // For hover states
+          'dark': '#1e2535',
         },
         'silver-gray': {
           DEFAULT: '#B0BEC5',
           50: '#f5f7f8',
           100: '#e8ecef',
           200: '#d0d9de',
-          300: '#B0BEC5', // Primary brand color
+          300: '#B0BEC5',
           400: '#90a4ae',
           500: '#78909c',
           600: '#607d8b',
           700: '#546e7a',
           800: '#455a64',
           900: '#37474f',
-          'light': '#e8ecef', // For subtle backgrounds
-          'dark': '#78909c', // For borders
+          'light': '#e8ecef',
+          'dark': '#78909c',
         },
         'accent-orange': {
           DEFAULT: '#FF6F00',
@@ -46,17 +45,23 @@ module.exports = {
           200: '#ffcc80',
           300: '#ffb84d',
           400: '#ffa31a',
-          500: '#FF6F00', // Primary accent color
+          500: '#FF6F00',
           600: '#cc5900',
           700: '#994300',
           800: '#662d00',
           900: '#331700',
-          'dark': '#cc5900', // For hover states
-          'light': '#ffa31a', // For lighter accents
-        }
+          'dark': '#cc5900',
+          'light': '#ffa31a',
+        },
+        'charcoal': {
+          DEFAULT: '#1a1a2e',
+          light: '#16213e',
+          mid: '#0f3460',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Barlow Condensed', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
       },
       fontWeight: {
@@ -66,6 +71,7 @@ module.exports = {
         semibold: '600',
         bold: '700',
         extrabold: '800',
+        black: '900',
       },
       container: {
         center: true,
@@ -77,6 +83,52 @@ module.exports = {
           xl: '1280px',
           '2xl': '1536px',
         },
+      },
+      keyframes: {
+        scan: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100vh)' },
+        },
+        'gradient-x': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        glow: {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'count-up': {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-up-fade': {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        scan: 'scan 3s linear infinite',
+        'gradient-x': 'gradient-x 4s ease infinite',
+        glow: 'glow 2s ease-in-out infinite',
+        shimmer: 'shimmer 2s linear infinite',
+        'count-up': 'count-up 0.6s ease-out forwards',
+        'slide-up-fade': 'slide-up-fade 0.7s ease-out forwards',
+        marquee: 'marquee 25s linear infinite',
+      },
+      backgroundSize: {
+        'size-200': '200% 200%',
+      },
+      transitionDuration: {
+        '400': '400ms',
+        '600': '600ms',
       },
     },
   },

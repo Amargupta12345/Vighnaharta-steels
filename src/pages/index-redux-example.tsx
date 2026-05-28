@@ -82,7 +82,6 @@ export default function HomeReduxExample() {
 
         {/* Hero Section */}
         <Banner
-          title={heroData.title}
           subtitle={heroData.subtitle}
           description={heroData.description}
           primaryButtonText={heroData.primaryButtonText}

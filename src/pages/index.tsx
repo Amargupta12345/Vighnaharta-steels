@@ -9,614 +9,426 @@ import ProductGrid from '../components/ProductGrid';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { fetchFeaturedProducts } from '../store/slices/productsSlice';
 import { fetchFeaturedTestimonials } from '../store/slices/testimonialsSlice';
-import { fetchHomeData } from '../store/slices/homeSlice';
 
 export default function Home() {
   const dispatch = useAppDispatch();
 
-  // Get data from Redux store (no prop drilling needed!)
   const featuredProducts = useAppSelector((state) => state.products.featuredProducts);
   const productsLoading = useAppSelector((state) => state.products.loading);
-  const productsError = useAppSelector((state) => state.products.error);
-
-  const homeData = useAppSelector((state) => state.home.data);
-  const homeLoading = useAppSelector((state) => state.home.loading);
-
   const testimonials = useAppSelector((state) => state.testimonials.featuredTestimonials);
-  const testimonialsLoading = useAppSelector((state) => state.testimonials.loading);
 
-  const loading = productsLoading || homeLoading || testimonialsLoading;
-  const error = productsError;
-
-  // Fetch data from Redux store on mount
   useEffect(() => {
     dispatch(fetchFeaturedProducts());
     dispatch(fetchFeaturedTestimonials(3));
-    dispatch(fetchHomeData());
   }, [dispatch]);
 
-  const features = homeData?.features || [
-    {
-      icon: "checkmark",
-      title: "Quality Assurance",
-      description: "All products undergo rigorous quality testing to ensure they meet industry standards."
-    },
-    {
-      icon: "clock",
-      title: "Timely Delivery",
-      description: "We ensure on-time delivery of your orders with our efficient logistics network."
-    },
-    {
-      icon: "money",
-      title: "Competitive Pricing",
-      description: "Best market prices without compromising on quality and service excellence."
-    }
-  ];
-
-  const heroData = homeData?.hero || {
-    title: "Premium Steel Solutions",
-    subtitle: "Vighnaharta Steel Industries",
-    description: "Leading manufacturer and supplier of high-quality steel products for construction and industrial applications.",
-    primaryButtonText: "View Products",
-    primaryButtonLink: "/product",
-    secondaryButtonText: "Get Quote",
-    secondaryButtonLink: "/quote"
-  };
-
-  const partnerBrands = [
-    'SAIL', 'TATA Steel', 'JSW Steel', 'JINDAL', 'RINL (VIZAG)', 'ESSAR', 'POSCO', 'AM/NS India'
-  ];
+  const partnerBrands = ['TATA Steel', 'JSW Steel', 'SAIL', 'JINDAL Steel', 'RINL (Vizag)', 'ESSAR Steel', 'POSCO India', 'AM/NS India'];
 
   const productCategories = [
-    { name: 'TMT Rebars', description: 'High-strength deformed bars for reinforced concrete', image: '/assets/images/steel-rod.png', link: '/product/steel-rods' },
-    { name: 'Steel Plates', description: 'Hot rolled steel plates for structural applications', image: '/assets/images/steel-sheet.png', link: '/product/steel-plates' },
-    { name: 'Structural Steel', description: 'I-beams, channels, angles for construction', image: '/assets/images/steel-beam.png', link: '/product/steel-i-beams' },
-    { name: 'Steel Pipes', description: 'Seamless & welded pipes for industrial use', image: '/assets/images/steel-pipe.png', link: '/product/steel-pipes' },
+    { name: 'TMT Rebars', description: 'High-strength deformed bars for RCC', image: '/assets/images/steel-rod.png', href: '/product?category=Reinforcement Steel' },
+    { name: 'Structural Steel', description: 'I-beams, channels, angles for construction', image: '/assets/images/steel-beam.png', href: '/product?category=Structural Steel' },
+    { name: 'Sheets & Plates', description: 'Hot/cold rolled sheets for industrial use', image: '/assets/images/steel-sheet.png', href: '/product?category=Sheet & Plates' },
+    { name: 'Steel Pipes', description: 'Seamless & welded pipes for all applications', image: '/assets/images/steel-pipe.png', href: '/product?category=Tubular Products' },
+  ];
+
+  const whyUs = [
+    { icon: '🏭', title: 'Direct from Mills', body: 'We source from TATA, JSW, SAIL & JINDAL — so you always get mill-certified, authentic material at wholesale rates.' },
+    { icon: '💰', title: 'Best Market Rates', body: 'Our direct procurement model eliminates middlemen and passes the savings straight to you.' },
+    { icon: '🚚', title: 'Pan-India Delivery', body: 'Efficient logistics ensure your material reaches your site on time — anywhere across India.' },
+    { icon: '📋', title: 'Mill Test Reports', body: 'Every batch comes with mill test certificates so your quality team has full traceability.' },
+    { icon: '📦', title: 'Bulk & Retail', body: 'Whether it is 1 MT or 1000 MT, we cater to all order sizes with flexible payment options.' },
+    { icon: '🤝', title: 'Dedicated Support', body: 'A single point of contact for all your orders — from enquiry to delivery follow-up.' },
+  ];
+
+  const howItWorks = [
+    { step: '01', icon: '📞', title: 'Share Your Requirement', desc: 'Tell us the grade, size, and quantity you need. Our team will confirm availability instantly.' },
+    { step: '02', icon: '📄', title: 'Get a Competitive Quote', desc: 'We send you a detailed quote with current market prices within 24 hours.' },
+    { step: '03', icon: '✅', title: 'Confirm & Book', desc: 'Approve the quote, make an advance, and your order is locked at the agreed rate.' },
+    { step: '04', icon: '🚛', title: 'Delivery to Your Site', desc: 'Material dispatched directly from our yard or mill — tracked from loading to delivery.' },
   ];
 
   return (
     <>
       <Head>
-        <title>Vighnaharta Steel Industries - Quality Steel Products</title>
-        <meta
-          name="description"
-          content="Leading manufacturer and supplier of high-quality steel products including beams, rods, sheets, and pipes. Trusted steel industry partner for construction and industrial needs."
-        />
-        <meta name="keywords" content="steel, steel products, steel beams, steel rods, steel sheets, steel pipes, construction materials, industrial steel, Vighnaharta Steel" />
+        <title>Vighnaharta Steel — Authorized Steel Wholesaler | TATA · JSW · SAIL · JINDAL</title>
+        <meta name="description" content="Vighnaharta Steel is an authorized wholesale dealer of TATA Steel, JSW, SAIL & JINDAL. Best market prices, mill-certified stock, pan-India delivery. Get a quote today." />
+        <meta name="keywords" content="steel wholesaler, TMT bars, structural steel, TATA steel dealer, JSW dealer, SAIL dealer, steel wholesale, construction material" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="min-h-screen">
         <Navbar />
 
-        {/* Hero Section */}
-        <Banner
-          title={heroData.title}
-          subtitle={heroData.subtitle}
-          description={heroData.description}
-          primaryButtonText={heroData.primaryButtonText}
-          primaryButtonLink={heroData.primaryButtonLink}
-          secondaryButtonText={heroData.secondaryButtonText}
-          secondaryButtonLink={heroData.secondaryButtonLink}
-        />
+        {/* ── HERO ── */}
+        <Banner />
 
-        {/* Loading State */}
-        {loading && (
-          <div className="container mx-auto px-4 py-16 text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accent-orange"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+        {/* ── BRAND MARQUEE ── */}
+        <section className="py-12 bg-white border-b border-gray-100 overflow-hidden">
+          <div className="container mx-auto px-4 mb-8 text-center">
+            <p className="text-xs font-bold text-gray-400 tracking-[0.2em] uppercase">Authorized Wholesale Dealer Of India's Top Steel Manufacturers</p>
           </div>
-        )}
-
-        {/* Error State */}
-        {error && !loading && (
-          <div className="container mx-auto px-4 py-16">
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
-              <p className="text-yellow-800">{error}</p>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            <div className="flex marquee-track" style={{ width: 'max-content' }}>
+              {[...partnerBrands, ...partnerBrands].map((brand, i) => (
+                <div key={i} className="flex-shrink-0 mx-5 px-8 py-4 border border-gray-200 rounded-xl hover:border-accent-orange/40 hover:shadow-md transition-all duration-300 bg-white cursor-default group">
+                  <span className="text-steel-blue font-extrabold text-base group-hover:text-accent-orange transition-colors duration-300 whitespace-nowrap">{brand}</span>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* Main Content */}
-        {!loading && (
-          <>
-            {/* ====== FOUNDER / LEADERSHIP SECTION (SM Steels inspired) ====== */}
-            <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-accent-orange/5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-72 h-72 bg-steel-blue/5 rounded-full blur-3xl"></div>
-              <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                  {/* Founder Image */}
-                  <div className="relative">
-                    <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
-                      <Image
-                        src="/assets/images/hero-banner.png"
-                        alt="Vighnaharta Steel Industries Facility"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-steel-blue/60 via-transparent to-transparent"></div>
+        {/* ── WHO WE ARE ── */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-gray-50 to-transparent pointer-events-none" />
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Image */}
+              <div className="relative order-2 lg:order-1">
+                <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image src="/assets/images/steel-factory.png" alt="Steel warehouse and yard" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-steel-blue-900/50 to-transparent" />
+                </div>
+                {/* Floating badge */}
+                <div className="absolute -bottom-5 -right-4 md:right-4 bg-white rounded-2xl shadow-2xl border border-gray-100 p-5">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-accent-orange rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span className="text-white font-extrabold text-lg">15+</span>
                     </div>
-                    {/* Floating stats badge */}
-                    <div className="absolute -bottom-6 -right-6 md:right-6 bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-gradient-to-br from-accent-orange to-accent-orange-dark rounded-xl flex items-center justify-center shadow-lg">
-                          <span className="text-white text-2xl font-extrabold">15+</span>
-                        </div>
-                        <div>
-                          <div className="text-steel-blue font-extrabold text-lg">Years of</div>
-                          <div className="text-gray-500 text-sm">Excellence</div>
-                        </div>
-                      </div>
+                    <div>
+                      <p className="font-extrabold text-steel-blue text-sm leading-tight">Years of</p>
+                      <p className="text-gray-500 text-xs">Trusted Service</p>
                     </div>
                   </div>
+                </div>
+                {/* Second badge */}
+                <div className="absolute -top-5 -left-4 md:left-4 bg-steel-blue text-white rounded-2xl shadow-2xl p-5">
+                  <p className="text-accent-orange font-extrabold text-lg leading-none">500+</p>
+                  <p className="text-gray-300 text-xs mt-1">Clients Served</p>
+                </div>
+              </div>
 
-                  {/* Founder Story */}
-                  <div>
-                    <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
-                      <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                      <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">About Us</span>
+              {/* Text */}
+              <div className="order-1 lg:order-2">
+                <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
+                  <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse" />
+                  <span className="text-sm font-bold text-accent-orange tracking-wider uppercase">Who We Are</span>
+                </div>
+                <h2 className="font-display font-black text-4xl md:text-6xl text-steel-blue mb-6 leading-[0.95] uppercase tracking-tight">
+                  India&apos;s Trusted <br /><span className="text-accent-orange">Steel Wholesaler</span>
+                </h2>
+                <div className="space-y-4 text-gray-600 leading-relaxed text-[17px] mb-8">
+                  <p>
+                    <strong className="text-steel-blue">Vighnaharta Steel</strong> is an authorized wholesale dealer of India's top steel manufacturers — TATA Steel, JSW, SAIL, and JINDAL. We don't just sell steel; we source it directly from the mill and deliver it straight to your project.
+                  </p>
+                  <p>
+                    With over <strong className="text-steel-blue">15 years</strong> of experience, we have become the preferred procurement partner for builders, contractors, fabricators, and dealers across the country — trusted for our transparent pricing, genuine material, and on-time delivery.
+                  </p>
+                </div>
+
+                {/* Trust points */}
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  {[
+                    'Mill-certified, BIS-marked stock',
+                    'Live market rate pricing',
+                    'Pan-India delivery network',
+                    'Dedicated account manager',
+                  ].map((p) => (
+                    <div key={p} className="flex items-center gap-2 text-sm text-gray-700">
+                      <div className="w-5 h-5 rounded-full bg-green-50 border border-green-200 flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      {p}
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-6 leading-tight">
-                      Building India&apos;s <span className="text-accent-orange">Future</span> with Steel
-                    </h2>
+                  ))}
+                </div>
 
-                    <div className="space-y-4 text-gray-600 leading-relaxed text-lg mb-8">
-                      <p>
-                        Vighnaharta Steel Industries is a leading name in the steel supply and distribution business, with an experience of over <strong className="text-steel-blue">15 years</strong> serving the construction and industrial sectors across India.
-                      </p>
-                      <p>
-                        Our journey started with a vision to deliver high-quality steel products with unmatched service. Today, we are trusted by hundreds of dealers, architects, fabricators, and builders across the country.
-                      </p>
-                      <p>
-                        The fundamental pillar of our success is our talented, motivated workforce, which continues to harness diverse synergies &mdash; making Vighnaharta Steel a top company in steel distribution.
-                      </p>
+                <Link href="/about" className="group inline-flex items-center gap-2 bg-steel-blue hover:bg-steel-blue-dark text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:-translate-y-0.5">
+                  Our Story
+                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── WHY BUY FROM US ── */}
+        <section className="py-24 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-steel-blue/10 border border-steel-blue/20 rounded-full px-5 py-2 mb-5">
+                <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse" />
+                <span className="text-sm font-bold text-steel-blue tracking-wider uppercase">Why Choose Us</span>
+              </div>
+              <h2 className="font-display font-black text-4xl md:text-6xl text-steel-blue mb-4 uppercase tracking-tight">
+                The Wholesale <span className="text-accent-orange">Advantage</span>
+              </h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                We sit between the mill and your site — cutting out every unnecessary step so you get more value.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {whyUs.map((item, i) => (
+                <div key={i} className="group bg-white rounded-2xl p-7 border border-gray-100 hover:border-accent-orange/30 hover:shadow-xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  <div className="text-3xl mb-4">{item.icon}</div>
+                  <h3 className="text-lg font-bold text-steel-blue mb-2 group-hover:text-accent-orange transition-colors duration-300">{item.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── PRODUCT CATEGORIES ── */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-5">
+                <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse" />
+                <span className="text-sm font-bold text-accent-orange tracking-wider uppercase">What We Stock</span>
+              </div>
+              <h2 className="font-display font-black text-4xl md:text-6xl text-steel-blue mb-4 uppercase tracking-tight">
+                Product <span className="text-accent-orange">Categories</span>
+              </h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                Full range of steel products sourced directly from certified mills — ready for immediate dispatch.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {productCategories.map((cat, i) => (
+                <Link key={i} href={cat.href} className="group relative h-[360px] rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 block">
+                  <Image src={cat.image} alt={cat.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 25vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-steel-blue-900/95 via-steel-blue/50 to-transparent group-hover:from-steel-blue-900 transition-all duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h3 className="text-xl font-extrabold mb-1 group-hover:text-accent-orange transition-colors duration-300">{cat.name}</h3>
+                    <p className="text-gray-300 text-sm mb-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">{cat.description}</p>
+                    <span className="inline-flex items-center gap-1.5 text-accent-orange text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-400 delay-75">
+                      Browse Products
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Link href="/product" className="group inline-flex items-center gap-2 border-2 border-steel-blue text-steel-blue hover:bg-steel-blue hover:text-white px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-0.5">
+                View All Products
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── STATS ── */}
+        <section className="py-20 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)', backgroundSize: '40px 40px' }} />
+          <div className="absolute top-0 left-1/4 w-72 h-72 bg-accent-orange/10 rounded-full blur-3xl" />
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { value: '500+', label: 'Happy Customers', sub: 'Contractors · Builders · Dealers' },
+                { value: '15+', label: 'Years of Service', sub: 'Established & Trusted' },
+                { value: '50+', label: 'Product Variants', sub: 'All grades & sizes' },
+                { value: '24hr', label: 'Quote Turnaround', sub: 'Fast response guaranteed' },
+              ].map((s, i) => (
+                <div key={i} className="text-center group">
+                  <div className="font-display font-black text-5xl md:text-6xl text-accent-orange mb-1 group-hover:scale-110 transition-transform duration-300">{s.value}</div>
+                  <div className="text-white font-bold text-base mb-1">{s.label}</div>
+                  <div className="text-gray-400 text-xs">{s.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── HOW WE WORK ── */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-5">
+                <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse" />
+                <span className="text-sm font-bold text-accent-orange tracking-wider uppercase">Ordering Process</span>
+              </div>
+              <h2 className="font-display font-black text-4xl md:text-6xl text-steel-blue mb-4 uppercase tracking-tight">
+                How to <span className="text-accent-orange">Order</span>
+              </h2>
+              <p className="text-lg text-gray-500 max-w-xl mx-auto">Simple, transparent, and fast — from enquiry to delivery in 4 steps.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+              {/* connector line */}
+              <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-accent-orange/20 via-accent-orange to-accent-orange/20" style={{ top: '2.5rem' }} />
+
+              {howItWorks.map((h, i) => (
+                <div key={i} className="relative group text-center">
+                  <div className="w-16 h-16 bg-white border-2 border-accent-orange/30 group-hover:border-accent-orange rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-sm group-hover:shadow-lg transition-all duration-300 relative z-10 bg-white">
+                    <span className="text-2xl">{h.icon}</span>
+                  </div>
+                  <div className="text-xs font-bold text-accent-orange/60 mb-1 tracking-widest">STEP {h.step}</div>
+                  <h3 className="text-lg font-bold text-steel-blue mb-2 group-hover:text-accent-orange transition-colors duration-300">{h.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{h.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Link href="/quote" className="group inline-flex items-center gap-2 bg-accent-orange hover:bg-accent-orange-dark text-white px-10 py-4 rounded-xl font-bold transition-all duration-300 shadow-lg shadow-accent-orange/25 hover:-translate-y-0.5 hover:shadow-xl">
+                Start Your Order Now
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── INDUSTRIES ── */}
+        <section className="py-24 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-steel-blue/10 border border-steel-blue/20 rounded-full px-5 py-2 mb-5">
+                <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse" />
+                <span className="text-sm font-bold text-steel-blue tracking-wider uppercase">Who We Serve</span>
+              </div>
+              <h2 className="font-display font-black text-4xl md:text-6xl text-steel-blue mb-4 uppercase tracking-tight">
+                Industries We <span className="text-accent-orange">Serve</span>
+              </h2>
+              <p className="text-lg text-gray-500 max-w-xl mx-auto">Our steel reaches projects across every major sector in India.</p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              {[
+                { name: 'Construction', icon: '🏗️', desc: 'Residential & commercial buildings' },
+                { name: 'Infrastructure', icon: '🌉', desc: 'Bridges, highways & metro' },
+                { name: 'Manufacturing', icon: '🏭', desc: 'Fabrication & industrial plants' },
+                { name: 'Real Estate', icon: '🏢', desc: 'Developers & housing projects' },
+              ].map((ind, i) => (
+                <div key={i} className="group bg-white rounded-2xl p-7 text-center border border-gray-100 hover:border-accent-orange/20 hover:shadow-xl transition-all duration-400 hover:-translate-y-2 cursor-default">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{ind.icon}</div>
+                  <h3 className="text-base font-bold text-steel-blue mb-1 group-hover:text-accent-orange transition-colors duration-300">{ind.name}</h3>
+                  <p className="text-gray-400 text-xs">{ind.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── FEATURED PRODUCTS ── */}
+        {!productsLoading && featuredProducts.length > 0 && (
+          <ProductGrid
+            products={featuredProducts}
+            title="Featured Products"
+            description="Handpicked products from our live inventory — all sourced directly from certified mills."
+            columns={4}
+            showViewAll
+          />
+        )}
+
+        {/* ── TESTIMONIALS ── */}
+        {testimonials.length > 0 && (
+          <section className="py-24 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-14">
+                <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-5">
+                  <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse" />
+                  <span className="text-sm font-bold text-accent-orange tracking-wider uppercase">Client Reviews</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
+                  What Our Clients <span className="text-accent-orange">Say</span>
+                </h2>
+                <p className="text-lg text-gray-500 max-w-xl mx-auto">Trusted by builders, contractors, and dealers across India.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mb-10">
+                {testimonials.slice(0, 3).map((t: any) => (
+                  <div key={t.id} className="group bg-white rounded-2xl p-7 border border-gray-100 hover:border-accent-orange/20 hover:shadow-xl transition-all duration-400 hover:-translate-y-1 relative">
+                    {/* Quote mark */}
+                    <div className="absolute -top-3 left-6 w-9 h-9 bg-accent-orange rounded-xl flex items-center justify-center shadow-md">
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z" />
+                      </svg>
                     </div>
 
-                    {/* Quick facts */}
-                    <div className="grid grid-cols-3 gap-4 mb-8">
-                      {[
-                        { value: '500+', label: 'Clients' },
-                        { value: '1000+', label: 'Projects' },
-                        { value: '50+', label: 'Team Members' }
-                      ].map((stat, i) => (
-                        <div key={i} className="text-center p-4 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-2xl text-white">
-                          <div className="text-2xl font-extrabold text-accent-orange">{stat.value}</div>
-                          <div className="text-xs text-gray-300 mt-1">{stat.label}</div>
-                        </div>
+                    <div className="flex gap-1 mt-3 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className={`w-4 h-4 ${i < t.rating ? 'text-amber-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
                       ))}
                     </div>
 
-                    <Link
-                      href="/about"
-                      className="group inline-flex items-center gap-2 bg-accent-orange hover:bg-accent-orange-dark text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-accent-orange/25 hover:shadow-xl hover:-translate-y-0.5"
-                    >
-                      Read Our Full Story
-                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </section>
+                    <p className="text-gray-600 text-sm leading-relaxed italic mb-5">&ldquo;{t.comment.substring(0, 160)}&hellip;&rdquo;</p>
 
-            {/* ====== PRODUCT CATEGORIES (SM Steels inspired - large cards) ====== */}
-            <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                  <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
-                    <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Our Products</span>
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                    Product <span className="text-accent-orange">Categories</span>
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Comprehensive range of steel products for every construction and industrial need
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {productCategories.map((cat, index) => (
-                    <Link key={index} href={cat.link} className="group relative h-[400px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 block">
-                      <Image
-                        src={cat.image}
-                        alt={cat.name}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-steel-blue-900/90 via-steel-blue/40 to-transparent group-hover:from-steel-blue-900/95 transition-all duration-500"></div>
-                      {/* Content */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 className="text-2xl font-extrabold mb-2 group-hover:text-accent-orange transition-colors duration-300">{cat.name}</h3>
-                        <p className="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">{cat.description}</p>
-                        <div className="inline-flex items-center gap-2 text-accent-orange font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                          Know More
-                          <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                          </svg>
-                        </div>
+                    <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                      <div className="w-9 h-9 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                        {t.name.charAt(0)}
                       </div>
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="text-center mt-12">
-                  <Link
-                    href="/product"
-                    className="group inline-flex items-center gap-2 bg-steel-blue hover:bg-steel-blue-dark text-white px-10 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                  >
-                    View All Products
-                    <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </section>
-
-            {/* ====== PARTNER BRANDS / "WE WORK WITH" (SM Steels inspired) ====== */}
-            <section className="py-16 bg-white border-y border-gray-100">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-10">
-                  <div className="inline-flex items-center gap-2 bg-steel-blue/10 border border-steel-blue/20 rounded-full px-5 py-2 mb-4">
-                    <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-steel-blue tracking-wider uppercase">We Work With</span>
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-steel-blue">
-                    Authorized Dealers & <span className="text-accent-orange">Partners</span>
-                  </h2>
-                </div>
-
-                {/* Marquee of partner brands */}
-                <div className="overflow-hidden relative">
-                  <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
-                  <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
-                  <div className="flex marquee-track" style={{ width: 'max-content' }}>
-                    {[...partnerBrands, ...partnerBrands].map((brand, i) => (
-                      <div key={i} className="flex-shrink-0 mx-6 px-10 py-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-accent-orange/30 hover:shadow-lg transition-all duration-300 group cursor-default">
-                        <span className="text-steel-blue font-extrabold text-lg md:text-xl group-hover:text-accent-orange transition-colors duration-300 whitespace-nowrap">{brand}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Features Section */}
-            <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16 animate-fade-in">
-                  <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
-                    <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Why Choose Us</span>
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                    Why Choose <span className="text-accent-orange">Vighnaharta</span> Steel?
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    With decades of experience in the steel industry, we deliver quality products
-                    that meet the highest standards of durability and performance.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {features.map((feature: any, index: number) => (
-                    <div
-                      key={index}
-                      className="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-accent-orange/30 transition-all duration-500 hover:-translate-y-2 cursor-pointer animate-slide-up"
-                      style={{ animationDelay: `${index * 150}ms` }}
-                    >
-                      {/* Gradient accent line */}
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-orange to-accent-orange-light rounded-t-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-
-                      <div className="w-16 h-16 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-accent-orange/20 group-hover:scale-110 transition-all duration-500">
-                        {feature.icon === 'checkmark' && (
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                          </svg>
-                        )}
-                        {feature.icon === 'clock' && (
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                          </svg>
-                        )}
-                        {feature.icon === 'money' && (
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                          </svg>
-                        )}
-                      </div>
-                      <h3 className="text-xl font-bold text-steel-blue mb-3 group-hover:text-accent-orange transition-colors duration-300">{feature.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-
-                      {/* Arrow icon on hover */}
-                      <div className="mt-4 flex items-center text-accent-orange opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
-                        <span className="text-sm font-semibold">Learn More</span>
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                        </svg>
+                      <div>
+                        <p className="font-bold text-steel-blue text-sm">{t.name}</p>
+                        <p className="text-gray-400 text-xs">{t.designation}, {t.company}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Stats Section */}
-            <section className="py-20 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white relative overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 left-0 w-72 h-72 bg-accent-orange/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-orange/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
-
-              <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                  {[
-                    { value: '500+', label: 'Happy Customers', icon: '👥' },
-                    { value: '1000+', label: 'Projects Completed', icon: '🏗️' },
-                    { value: '15+', label: 'Years Experience', icon: '📅' },
-                    { value: '50+', label: 'Product Variants', icon: '📦' }
-                  ].map((stat, index) => (
-                    <div
-                      key={index}
-                      className="text-center group cursor-default hover:scale-110 transition-transform duration-500"
-                    >
-                      <div className="text-3xl mb-3 group-hover:scale-125 transition-transform duration-300">{stat.icon}</div>
-                      <div className="text-4xl md:text-5xl font-extrabold mb-2 text-accent-orange">{stat.value}</div>
-                      <div className="text-gray-300 text-sm md:text-base font-medium tracking-wide">{stat.label}</div>
-                      <div className="w-12 h-1 bg-accent-orange/40 rounded-full mx-auto mt-3 group-hover:w-20 group-hover:bg-accent-orange transition-all duration-500"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Industries We Serve */}
-            <section className="py-20 bg-white">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16 animate-fade-in">
-                  <div className="inline-flex items-center gap-2 bg-steel-blue/10 border border-steel-blue/20 rounded-full px-5 py-2 mb-6">
-                    <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-steel-blue tracking-wider uppercase">Our Reach</span>
                   </div>
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                    Industries We <span className="text-accent-orange">Serve</span>
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Providing high-quality steel solutions across diverse sectors
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {[
-                    { name: 'Construction', icon: '🏗️', description: 'Building & Infrastructure', color: 'from-orange-50 to-orange-100' },
-                    { name: 'Manufacturing', icon: '🏭', description: 'Industrial Applications', color: 'from-blue-50 to-blue-100' },
-                    { name: 'Infrastructure', icon: '🌉', description: 'Bridges & Highways', color: 'from-green-50 to-green-100' },
-                    { name: 'Energy', icon: '⚡', description: 'Power & Utilities', color: 'from-yellow-50 to-yellow-100' }
-                  ].map((industry, index) => (
-                    <div
-                      key={index}
-                      className={`group relative bg-gradient-to-br ${industry.color} p-8 rounded-2xl hover:shadow-2xl transition-all duration-500 text-center border border-transparent hover:border-accent-orange/20 hover:-translate-y-3 cursor-pointer`}
-                    >
-                      <div className="text-5xl mb-4 group-hover:scale-125 group-hover:-rotate-12 transition-all duration-500">{industry.icon}</div>
-                      <h3 className="text-lg font-bold text-steel-blue mb-1 group-hover:text-accent-orange transition-colors duration-300">{industry.name}</h3>
-                      <p className="text-sm text-gray-600">{industry.description}</p>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
-            </section>
 
-            {/* Featured Products Section */}
-            <ProductGrid
-              products={featuredProducts}
-              title="Featured Products"
-              description="Explore our range of high-quality steel products designed to meet your construction and industrial requirements."
-              columns={4}
-              showViewAll={true}
-            />
-
-            {/* How We Work */}
-            <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16 animate-fade-in">
-                  <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
-                    <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Our Process</span>
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                    How We <span className="text-accent-orange">Work</span>
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Our streamlined process ensures you get the best steel products with maximum efficiency
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  {[
-                    { step: '01', title: 'Consultation', description: 'Discuss your requirements with our expert team to find the ideal steel solution', icon: '💬' },
-                    { step: '02', title: 'Customization', description: 'We tailor solutions precisely to meet your specific project needs and standards', icon: '⚙️' },
-                    { step: '03', title: 'Quality Check', description: 'Rigorous testing at every stage ensures highest quality standards are met', icon: '✅' },
-                    { step: '04', title: 'Delivery', description: 'Timely and secure delivery to your project location across India', icon: '🚚' }
-                  ].map((process, index) => (
-                    <div key={index} className="relative group">
-                      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-accent-orange/20 transition-all duration-500 hover:-translate-y-2">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{process.icon}</div>
-                          <div className="text-3xl font-extrabold text-steel-blue/10 group-hover:text-accent-orange/30 transition-colors duration-300">{process.step}</div>
-                        </div>
-                        <h3 className="text-xl font-bold text-steel-blue mb-2 group-hover:text-accent-orange transition-colors duration-300">{process.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{process.description}</p>
-                      </div>
-                      {index < 3 && (
-                        <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                          <svg className="w-8 h-8 text-accent-orange" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+              <div className="text-center">
+                <Link href="/testimonials" className="group inline-flex items-center gap-2 border-2 border-steel-blue/20 hover:border-steel-blue text-steel-blue px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5">
+                  Read All Reviews
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
-            </section>
-
-            {/* Certifications & Standards */}
-            <section className="py-20 bg-white">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-16 animate-fade-in">
-                  <div className="inline-flex items-center gap-2 bg-steel-blue/10 border border-steel-blue/20 rounded-full px-5 py-2 mb-6">
-                    <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse"></span>
-                    <span className="text-sm font-semibold text-steel-blue tracking-wider uppercase">Trust & Quality</span>
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                    Certifications & <span className="text-accent-orange">Standards</span>
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Our commitment to quality is backed by industry certifications and standards
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {[
-                    { name: 'IS 2062', description: 'Structural Steel', icon: '🛡️' },
-                    { name: 'IS 800', description: 'Design Code', icon: '📐' },
-                    { name: 'IS 1239', description: 'Steel Pipes', icon: '🔧' },
-                    { name: 'ISO 9001', description: 'Quality Management', icon: '⭐' }
-                  ].map((cert, index) => (
-                    <div
-                      key={index}
-                      className="group relative bg-gradient-to-br from-steel-blue to-steel-blue-dark text-white p-8 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-default"
-                    >
-                      {/* Shimmer effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-                      <div className="text-3xl mb-3 group-hover:scale-125 transition-transform duration-500">{cert.icon}</div>
-                      <div className="text-2xl font-extrabold mb-2 group-hover:text-accent-orange transition-colors duration-300">{cert.name}</div>
-                      <div className="text-sm text-gray-300">{cert.description}</div>
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Testimonials Preview */}
-            {testimonials.length > 0 && (
-              <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-                <div className="container mx-auto px-4">
-                  <div className="text-center mb-16 animate-fade-in">
-                    <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 rounded-full px-5 py-2 mb-6">
-                      <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                      <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Client Reviews</span>
-                    </div>
-                    <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
-                      What Our Customers <span className="text-accent-orange">Say</span>
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                      Trusted by leading construction companies and builders
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-                    {testimonials.slice(0, 3).map((testimonial: any) => (
-                      <div
-                        key={testimonial.id}
-                        className="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-accent-orange/20 transition-all duration-500 hover:-translate-y-2"
-                      >
-                        {/* Quote icon */}
-                        <div className="absolute -top-3 -left-3 w-10 h-10 bg-accent-orange rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z"/>
-                          </svg>
-                        </div>
-
-                        <div className="flex gap-1 mb-4 mt-2">
-                          {[...Array(5)].map((_, i) => (
-                            <svg
-                              key={i}
-                              className={`w-5 h-5 ${i < testimonial.rating ? 'text-accent-orange' : 'text-gray-200'}`}
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
-                        </div>
-                        <p className="text-gray-700 mb-6 italic leading-relaxed">&quot;{testimonial.comment.substring(0, 150)}...&quot;</p>
-                        <div className="border-t border-gray-100 pt-4 flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-steel-blue to-steel-blue-dark rounded-full flex items-center justify-center text-white font-bold text-sm">
-                            {testimonial.name.charAt(0)}
-                          </div>
-                          <div>
-                            <div className="font-bold text-steel-blue">{testimonial.name}</div>
-                            <div className="text-sm text-gray-500">{testimonial.designation}, {testimonial.company}</div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="text-center">
-                    <Link
-                      href="/testimonials"
-                      className="group inline-flex items-center gap-2 bg-steel-blue/10 hover:bg-steel-blue text-steel-blue hover:text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
-                    >
-                      View All Testimonials
-                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {/* CTA Section */}
-            <section className="py-24 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white relative overflow-hidden">
-              {/* Animated background shapes */}
-              <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-accent-orange/5 rounded-full blur-2xl animate-float"></div>
-
-              <div className="container mx-auto px-4 text-center relative z-10">
-                <div className="inline-flex items-center gap-2 bg-accent-orange/20 backdrop-blur-sm border border-accent-orange/30 rounded-full px-5 py-2 mb-8">
-                  <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
-                  <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Get Started</span>
-                </div>
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
-                  Ready to Start Your <span className="text-accent-orange">Project</span>?
-                </h2>
-                <p className="text-xl mb-10 opacity-80 max-w-2xl mx-auto">
-                  Get in touch with our experts for customized steel solutions and competitive pricing.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/quote"
-                    className="group bg-accent-orange hover:bg-accent-orange-dark text-white px-10 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center shadow-lg shadow-accent-orange/30 hover:shadow-xl hover:-translate-y-1"
-                  >
-                    Get Free Quote
-                    <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="group border-2 border-white/50 hover:bg-white hover:text-steel-blue px-10 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center hover:-translate-y-1"
-                  >
-                    Contact Us
-                    <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </section>
-          </>
+            </div>
+          </section>
         )}
+
+        {/* ── CTA ── */}
+        <section className="py-28 bg-gradient-to-br from-steel-blue via-steel-blue-dark to-steel-blue-900 text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)', backgroundSize: '50px 50px' }} />
+          <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-accent-orange/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <div className="inline-flex items-center gap-2 bg-accent-orange/20 border border-accent-orange/30 rounded-full px-5 py-2 mb-8">
+              <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse" />
+              <span className="text-xs font-bold text-accent-orange tracking-widest uppercase">Get Started Today</span>
+            </div>
+            <h2 className="font-display font-black text-4xl md:text-6xl mb-5 max-w-3xl mx-auto leading-[0.95] uppercase tracking-tight">
+              Need Steel for Your Next <span className="text-accent-orange">Project?</span>
+            </h2>
+            <p className="text-lg text-gray-300 mb-10 max-w-xl mx-auto">
+              Share your material list and we&apos;ll send you a competitive quote within 24 hours — no obligation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/quote" className="group bg-accent-orange hover:bg-accent-orange-dark text-white px-10 py-4 rounded-xl font-bold transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-xl shadow-accent-orange/30 hover:-translate-y-1">
+                Request a Quote
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/contact" className="group border-2 border-white/30 hover:bg-white hover:text-steel-blue text-white px-10 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2 hover:-translate-y-1">
+                Talk to Our Team
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <Footer />
       </div>

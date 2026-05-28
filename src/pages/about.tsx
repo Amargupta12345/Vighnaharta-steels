@@ -39,7 +39,7 @@ export default function About() {
                 <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Our Story</span>
               </div>
-              <h1 className="animate-slide-up text-4xl md:text-6xl font-extrabold mb-6">About <span className="text-accent-orange">Us</span></h1>
+              <h1 className="animate-slide-up font-display font-black text-5xl md:text-7xl uppercase tracking-tight mb-6">About <span className="text-accent-orange">Us</span></h1>
               <p className="animate-slide-up text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Building the future with quality steel solutions since decades
               </p>
@@ -61,7 +61,7 @@ export default function About() {
                   <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse"></span>
                   <span className="text-sm font-semibold text-steel-blue tracking-wider uppercase">Who We Are</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-steel-blue mb-6">
+                <h2 className="font-display font-black text-3xl md:text-5xl uppercase tracking-tight text-steel-blue mb-6">
                   Building <span className="text-accent-orange">Trust</span> Since 2009
                 </h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
@@ -129,7 +129,7 @@ export default function About() {
                 <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-accent-orange tracking-wider uppercase">Our Purpose</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
+              <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight text-steel-blue mb-4">
                 Mission & <span className="text-accent-orange">Vision</span>
               </h2>
             </div>
@@ -177,7 +177,7 @@ export default function About() {
                 <span className="w-2 h-2 bg-steel-blue rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-steel-blue tracking-wider uppercase">What Drives Us</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-steel-blue mb-4">
+              <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight text-steel-blue mb-4">
                 Our Core <span className="text-accent-orange">Values</span>
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -247,7 +247,7 @@ export default function About() {
                 <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Our Impact</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+              <h2 className="font-display font-black text-4xl md:text-6xl uppercase tracking-tight mb-4">
                 Numbers That <span className="text-accent-orange">Speak</span>
               </h2>
             </div>

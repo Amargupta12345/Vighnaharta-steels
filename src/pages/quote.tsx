@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { company } from '../lib/company';
 
 export default function Quote() {
   const [formData, setFormData] = useState({
@@ -18,6 +20,7 @@ export default function Quote() {
     deliveryLocation: '',
     message: ''
   });
+  const [consent, setConsent] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -31,12 +34,19 @@ export default function Quote() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please accept the Privacy Policy and quote terms to submit the request.'
+      });
+      return;
+    }
     setSubmitting(true);
     setSubmitStatus(null);
 
     try {
       const { quoteAPI } = await import('../lib/api');
-      const response = await quoteAPI.submit(formData);
+      const response = await quoteAPI.submit({ ...formData, consent: true, consentAt: new Date().toISOString() } as any);
 
       if (response.success) {
         setSubmitStatus({
@@ -56,6 +66,7 @@ export default function Quote() {
           deliveryLocation: '',
           message: ''
         });
+        setConsent(false);
       }
     } catch (error: any) {
       console.error('Quote submission error:', error);
@@ -93,7 +104,7 @@ export default function Quote() {
                 <span className="w-2 h-2 bg-accent-orange rounded-full animate-pulse"></span>
                 <span className="text-sm font-semibold text-accent-orange-light tracking-wider uppercase">Request Pricing</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Get <span className="text-accent-orange">Quote</span></h1>
+              <h1 className="font-display font-black text-5xl md:text-7xl uppercase tracking-tight mb-6">Get a <span className="text-accent-orange">Quote</span></h1>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Request a customized quote for your steel requirements
               </p>
@@ -114,7 +125,7 @@ export default function Quote() {
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-orange via-accent-orange-light to-accent-orange"></div>
 
                 <div className="mb-10">
-                  <h2 className="text-3xl font-extrabold text-steel-blue mb-3">Request a Quote</h2>
+                  <h2 className="font-display font-black text-3xl md:text-4xl uppercase tracking-tight text-steel-blue mb-3">Request a Quote</h2>
                   <p className="text-gray-500 text-lg">
                     Fill out the form below with your requirements, and our sales team will provide you
                     with a competitive quote within 24 hours.
@@ -230,6 +241,47 @@ export default function Quote() {
                     </div>
                   </div>
 
+                  {/* Non-binding disclaimer */}
+                  <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-900">
+                    <p className="font-semibold mb-1 flex items-center gap-2">
+                      <span>ℹ️</span> Important Notice
+                    </p>
+                    <p>
+                      This is a <strong>request for quotation</strong> and not a confirmed order. Prices,
+                      availability and delivery dates are indicative, subject to change based on market rates
+                      and stock, and become binding only upon issue of our proforma / tax invoice. All prices
+                      are exclusive of GST and applicable transport / handling charges. Please review our{' '}
+                      <Link href="/terms" className="font-semibold underline">
+                        Terms &amp; Conditions
+                      </Link>
+                      .
+                    </p>
+                  </div>
+
+                  {/* Consent */}
+                  <div className="flex items-start gap-3 p-4 bg-gray-50 border border-gray-200 rounded-2xl">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      className="mt-1 w-4 h-4 accent-accent-orange flex-shrink-0 cursor-pointer"
+                      required
+                    />
+                    <label htmlFor="consent" className="text-sm text-gray-600 leading-relaxed cursor-pointer">
+                      I agree to Vighnaharta Steels processing my personal data for the purpose of preparing
+                      and sending a quotation, and I have read and accept the{' '}
+                      <Link href="/privacy" className="text-accent-orange font-semibold underline">
+                        Privacy Policy
+                      </Link>{' '}
+                      and{' '}
+                      <Link href="/terms" className="text-accent-orange font-semibold underline">
+                        Terms &amp; Conditions
+                      </Link>
+                      . I understand this is a request for quotation, not a binding order. *
+                    </label>
+                  </div>
+
                   {submitStatus && (
                     <div className={`p-5 rounded-2xl flex items-start gap-3 ${
                       submitStatus.type === 'success'
@@ -248,7 +300,7 @@ export default function Quote() {
 
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitting || !consent}
                     className="group w-full bg-gradient-to-r from-accent-orange to-accent-orange-dark text-white py-4 px-6 rounded-xl hover:shadow-lg hover:shadow-accent-orange/30 transition-all duration-300 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:-translate-y-0.5"
                   >
                     {submitting ? (
@@ -271,8 +323,8 @@ export default function Quote() {
               {/* Bottom Info Cards */}
               <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: '📞', title: 'Call Us', detail: '+91 98765 43210', sub: 'Mon-Sat, 9AM-6PM' },
-                  { icon: '✉️', title: 'Email Us', detail: 'sales@vighnahartasteel.com', sub: 'Quick response guaranteed' },
+                  { icon: '📞', title: 'Call Us', detail: company.phone1, sub: company.hours },
+                  { icon: '✉️', title: 'Email Us', detail: company.email, sub: 'Quick response guaranteed' },
                   { icon: '⏰', title: 'Response Time', detail: 'Within 24 Hours', sub: 'Business days' }
                 ].map((item, i) => (
                   <div key={i} className="group text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
